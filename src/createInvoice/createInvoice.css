@@ -1,0 +1,57 @@
+.create-invoice{
+    width: 100%;
+}
+.invoice-container{
+    max-width: 1140px;
+    padding: 2rem;
+    margin: 0 auto;
+  
+}
+h3 {
+    font-size: 2.5rem;
+    text-align: right;
+  }
+  p.invoice-title {
+    padding: 1rem 0 0.5rem;
+  }
+  .textfield-container {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 980px) {
+   .invoice-container{
+    width: 100%;
+    max-width: 100%;
+   }
+  }
+
+  .radioInput {
+    position: relative;
+   display: inline-block;
+   margin-right: 2rem;
+  }
+  .radioInput input {
+     position: absolute;
+     visibility: hidden;
+   }
+   .radioInput label {
+     padding: 0.3rem 0.6rem;
+     border: 2px solid #a0a0a0;
+     border-radius: 5px;
+     color: #a0a0a0;
+     cursor: pointer;
+   }
+   .radioInput  label {
+     display: inline-block;
+     padding: 0.3rem 0.6rem;
+     border: 2px solid #a0a0a0;
+     border-radius: 5px;
+     color: #a0a0a0;
+     cursor: pointer;
+   }
+ 
+   .radioInput input[type='radio']:checked ~ label {
+     border: 2px solid #6772e5;
+     color: #6772e5;
+   }

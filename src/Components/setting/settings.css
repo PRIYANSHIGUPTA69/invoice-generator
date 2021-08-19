@@ -1,0 +1,92 @@
+.setting{
+  width:100%;
+}
+.name-photo {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 1rem;
+   
+  }
+  .name-photo p {
+    padding: .5rem;
+    font-size: 1.4rem;
+  }
+  .default-settings {
+    max-width: 1140px;
+   
+    }
+    .default-settings h3 {
+      margin-left: 3rem;
+    font-size: 1.5rem;
+    text-align: left;
+    
+    }
+    .default-settings p {
+        font-size: 1.2rem;
+    }
+   
+    .default-settings p span {
+        display: block;
+        padding: 0.5rem 0;
+        font-size: 0.95rem;
+        color: #6772e5;
+        font-weight: bold;
+      }
+    
+    .textfield-container {
+      max-width: 80%;
+      margin: 0 auto;
+
+    }
+    
+    .MuiFormHelperText-contained.Mui-error {
+      font-size: 0.8rem;
+    }
+    .MuiInputBase-root.MuiInputBase-root.MuiOutlinedInput-root.Mui-disabled
+    fieldset {
+    border-color: transparent;
+  }
+  .MuiInputBase-root.MuiInputBase-root.MuiOutlinedInput-root {
+    color: #3a3a3a;
+  }
+  
+
+.kfRyXm .default-settings p span {
+    display: block;
+    padding: 0.5rem 0px;
+    font-size: 0.95rem;
+    color: rgb(103, 114, 229);
+}
+.edit{
+float: left;
+  color:#6772e5;
+  margin-left: 4rem;
+  outline: none;
+  border: none;
+  height:3rem;
+  width:200px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fff;
+  box-shadow: rgba(50, 50, 93, 0.11) 0px 4px 6px 0px,
+  rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
+}
+
+
+.edit:hover {
+  background-color: #f8f8f8;
+  color:#6772e5;
+  transform: translateY(-2px);
+  box-shadow: rgba(50, 50, 93, 0.18) 0px 4px 12px 0px,
+    rgba(0, 0, 0, 0.08) 0px 1px 6px 0px;
+}
+.edit:active {
+  color:#555abf;
+  transform: translateY(0);
+  box-shadow: rgba(22, 22, 41, 0.15) 0px 4px 8px 4px,
+    rgba(0, 0, 0, 0.1) 0px 1px 6px 2px;
+  outline: none;
+}

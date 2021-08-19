@@ -22,7 +22,8 @@ function Navlink(props) {
     e.target.style.borderRadius="120px"
   };
   return (
-    <NavLink
+   
+      <NavLink
       className="navlink"
       exact
       to="/"
@@ -39,6 +40,8 @@ function Navlink(props) {
       </div>
       
     </NavLink>
+  
+    
   );
 }
 

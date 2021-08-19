@@ -1,0 +1,67 @@
+.invoice-details{
+    width: 100%;
+}
+.ButtonDiv{
+    display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  width: 100%;
+}
+  @media screen and (max-width: 979px) {
+    .ButtonDiv{flex-direction: column;
+    max-width: 450px;
+    margin: 2rem auto;
+    }
+  }
+
+  button {
+    display: inline-block;
+    font-size: 16px;
+    
+    padding: 0.5rem 1rem;
+  }
+  button {
+    margin: 0.5rem 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+   
+  }
+ button span{
+    padding-left: .3rem;
+ }
+ 
+
+  button:hover {
+  
+    transform: translateY(-2px);
+    box-shadow: rgba(50, 50, 93, 0.18) 0px 4px 12px 0px,
+      rgba(0, 0, 0, 0.08) 0px 1px 6px 0px;
+  }
+
+  .danger{
+      background-color:#FD5665;
+      color:white;
+      width:150px;
+      height:3rem
+  }
+  .Yellow{
+      background-color:#fda734;
+      color:white;
+    width:200px;
+    height:3rem
+  }
+  .primary{
+    background-color: rgb(103, 114, 229);
+    color:white;
+    width:200px;
+    height:3rem
+  }
+  .secondary{
+   
+    background-color: #24B47E;
+    color:white;
+    width:150px;
+    height:3rem
+    
+  }

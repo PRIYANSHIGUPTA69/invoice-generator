@@ -1,0 +1,11 @@
+.table{
+    width:100%
+}
+.table-head{
+    background-color: #f6f9fc;
+ 
+}
+.table-head:hover {
+    cursor: default;
+    background-color: #f6f9fc;
+  }

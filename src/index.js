@@ -4,11 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router } from 'react-router-dom';
+import { store, rrfProps } from './redux/store';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { Provider } from 'react-redux';
 ReactDOM.render(
   <React.StrictMode>
-   <Router>
-      <App />
-      </Router>
+ <Provider store={store}>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+        <Router>
+          <App />
+          </Router>
+        </ReactReduxFirebaseProvider>
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,53 @@
+label {
+    display: block;
+    padding: 1rem 0 0.5rem;
+    color: #32325d;
+  }
+  input {
+    font-family: 'Lexend Deca';
+    border: transparent 2px solid;
+    border-radius: 3px;
+    background-color: #f2f6f9;
+    color: #6b7c93;
+    box-shadow: 0 3px 6px rgba(50, 50, 93, 0.1);
+    padding: 6px 10px;
+    transition: box-shadow 350ms ease;
+    display: block;
+    width: 100%;
+    
+  }
+  input:active,
+    input:focus {
+      box-shadow: 0 3px 9px 2px rgba(50, 50, 93, 0.15);
+      outline: none;
+    }
+
+.twoField{
+display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+button {
+  display: inline-block;
+  font-size: 16px;
+  
+  padding: 0.5rem 1rem;
+
+  margin: 0.5rem 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background-color:#fda734;
+  color:white;
+width:200px;
+height:3rem
+}
+
+
+button:hover {
+
+  transform: translateY(-2px);
+  box-shadow: rgba(50, 50, 93, 0.18) 0px 4px 12px 0px,
+    rgba(0, 0, 0, 0.08) 0px 1px 6px 0px;
+}

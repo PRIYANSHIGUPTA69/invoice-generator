@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-function Invoice(props) {
+function InvoiceCard(props) {
     const {Icon , type , number , color} = props
     let stylingObject = {
         div:{ 
@@ -52,4 +52,4 @@ function Invoice(props) {
     )
 }
 
-export default Invoice
+export default InvoiceCard

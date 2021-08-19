@@ -1,17 +1,13 @@
 import React from 'react';
-//Vendor
 import { Grid, Hidden } from '@material-ui/core';
-
-
-// Custom
+import {Link} from "react-router-dom"
 import Header from '../header/Header';
 import "./dashboard.css"
-import Invoice from '../Invoices/Invoice';
+import InvoiceCard from "../dashboard invoices card/InvoiceCard"
 import AlarmOnIcon from '@material-ui/icons/AlarmOn';
-
+import Table from "../table/Table"
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-// Component
 function Dashboard() {
  
 
@@ -20,23 +16,23 @@ function Dashboard() {
       <Header title={'Dashboard'} />
       <Grid container justify="center" align-items="center">
         <Grid item xs={12} sm={4} md={4}>
-        <Invoice Icon={AddCircleOutlineIcon}
+        <InvoiceCard Icon={AddCircleOutlineIcon}
                 type="Create"
                 number={10}
-                color="#00C1D4"></Invoice>
+                color="#00C1D4"/>
          
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-        <Invoice Icon={CheckCircleOutlineIcon}
+        <InvoiceCard Icon={CheckCircleOutlineIcon}
                 type="Fulfilled"
                 number={10}
-                color="#24B47E"></Invoice>
+                color="#24B47E"/>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-        <Invoice Icon={AlarmOnIcon}
+        <InvoiceCard Icon={AlarmOnIcon}
                 type="Pending"
                 number={10}
-                color="#F03738"></Invoice>
+                color="#F03738"/>
         </Grid>
       </Grid>
 
@@ -47,7 +43,12 @@ function Dashboard() {
         style={{ marginTop: '3rem', width: '100%' }}
       >
         <Grid item xs={12} md={12} lg={9}>
-          RecentInvoices
+          <div className=
+          'recent'>
+            <h2>Recent Invoicces</h2>
+            <Link>View Alll</Link>
+          </div>
+          <Table></Table>
         </Grid>
         <Hidden mdDown>
           <Grid item md={3} lg={3}>

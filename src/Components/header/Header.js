@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import "./header.css";
 function Header({ title }) {
   return (
-    <div>
+    <div >
       <nav className="appbar">
         <h2 style={{textDecoration:"none" ,fontSize:"2rem" , color:"black"}}>{title}</h2>
         <div>

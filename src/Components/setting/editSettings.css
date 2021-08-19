@@ -1,0 +1,104 @@
+.editSettings{
+    width:100%
+}
+.textfield-container {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+.radioInput {
+    position: relative;
+   display: inline-block;
+   margin-right: 2rem;
+  }
+  .radioInput input {
+     position: absolute;
+     visibility: hidden;
+   }
+   .radioInput label {
+     padding: 0.3rem 0.6rem;
+     border: 2px solid #a0a0a0;
+     border-radius: 5px;
+     color: #a0a0a0;
+     cursor: pointer;
+   }
+   .radioInput  label {
+     display: inline-block;
+     padding: 0.3rem 0.6rem;
+     border: 2px solid #a0a0a0;
+     border-radius: 5px;
+     color: #a0a0a0;
+     cursor: pointer;
+   }
+ 
+   .radioInput input[type='radio']:checked ~ label {
+     border: 2px solid #6772e5;
+     color: #6772e5;
+   }
+   button{
+  
+    float: left;
+    outline: none;
+    border: none;
+    height:2rem;
+    border-radius: 10px;
+    font-size: 20px;
+    width:100px
+   }
+   .flatButton{
+    margin-left: 3rem;
+    margin-top: 2rem;
+    color:  #6772e5;
+    background-color: #fff;
+    
+   
+   }
+   .flatButton:hover {
+    background-color: #f8f8f8;
+    color: #7795f8
+  }
+  .flatButton:active {
+    color:#555abf
+  }
+  
+  .secondaryButton{
+    margin-left: 2rem;
+    margin-top: 2rem;
+    background-color: #24B47E;
+    color: #fff;
+    box-shadow: rgba(50, 50, 93, 0.11) 0px 4px 6px 0px,
+      rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
+  }
+  .secondaryButton:disabled {
+    transform: none;
+    box-shadow: none;
+    position: relative;
+    z-index: 1;
+    box-shadow: rgba(50, 50, 93, 0.11) 0px 4px 6px 0px,
+      rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
+    overflow: hidden;
+    
+  }
+  .secondaryButton:active {
+    background-color: #1FA774;
+    transform: translateY(0);
+    box-shadow: rgba(22, 22, 41, 0.15) 0px 4px 8px 4px,
+      rgba(0, 0, 0, 0.1) 0px 1px 6px 2px;
+    outline: none;
+  }
+  .secondaryButton:hover {
+    background-color: #27CF90;
+    transform: translateY(-2px);
+    box-shadow: rgba(50, 50, 93, 0.18) 0px 4px 12px 0px,
+      rgba(0, 0, 0, 0.08) 0px 1px 6px 0px;
+  }
+  .secondaryButton :after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    border-radius: 5px;
+  }

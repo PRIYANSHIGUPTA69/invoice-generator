@@ -1,30 +1,52 @@
 import React from 'react';
 import './App.css';
+import { useSelector } from 'react-redux';
+import Signup from "./Components/user/Signup"
 import Sidebar from './Components/sidebar/Sidebar';
-
+import CreateInvoice from './createInvoice/CreateInvoice';
 import { Switch , Route , Redirect } from 'react-router';
 import Logo from "./images/logo.png"
 import Dashboard from './Components/dashboard/Dashboard';
+import Invoices from './Components/invoices/Invoices';
+import Settings from './Components/setting/Settings';
+import EditSetting from './Components/setting/EditSettings';
+import InvoiceDetails from './Components/invoices/InvoiceDetails';
+import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 function App() {
   const loader = false;
-  if(loader){
+const auth = useSelector((state) => state.firebase.auth);
+  useFirestoreConnect([
+    {
+      collection: 'users',
+      doc: auth.uid || ' ',
+      subcollections: [
+        { collection: 'invoices', orderBy: ['invoiceDate', 'desc'] }
+      ],
+      storeAs: 'invoices'
+    }
+  ]);
+
+
+  if (isEmpty(auth))
+  
     return (
-      <div className="App">
-      <img src={Logo} alt="invoice app logo" />
-   </div>
-    )
-  }
+      <Switch>
+        <Route exact path="/register" component={Signup} />
+      </Switch>
+    );
+
   return (
         <div className="App">
-         <Sidebar></Sidebar>
+      
+        <Sidebar></Sidebar>
          
          <Switch>
       <Route exact path="/" component={Dashboard} />
-      <Route exact path="/create" />
-      <Route exact path="/invoices"  />
-      <Route exact path="/settings"  />
-      <Route exact path="/settings/edit"  />
-      <Route exact path="/invoice/:id"  />
+      <Route exact path="/create" component={CreateInvoice} />
+      <Route exact path="/invoices" component={InvoiceDetails} />
+      <Route exact path="/settings"   component={Settings}/>
+      <Route exact path="/settings/edit" component = {EditSetting}/>
+      <Route exact path="/invoice/:id"  component={InvoiceDetails}/>
       <Route exact path="/register" render={() => <Redirect to="/" />} />
       <Route exact path="/login" render={() => <Redirect to="/" />} />
     
