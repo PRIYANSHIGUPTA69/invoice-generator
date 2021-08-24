@@ -1,6 +1,10 @@
 import React from 'react'
 import './table.css'
-function Table() {
+import moment from 'moment';
+function Table(props) {
+  const invoices = props.invoice;
+  let i=0;
+  console.log(invoices)
     return (
         <table className='table'>
   <tr className="table-head">
@@ -11,13 +15,19 @@ function Table() {
         <th className="status">Status</th>
         <th className="option"></th>
   </tr>
-  <tr>
-    <td>1</td>
-    <td>jan 16</td>
-    <td>Aman</td>
-    <td>2000</td>
-    <td>Pending</td>
-  </tr>
+  {invoices.map(invoice => {
+    i++
+    return (
+      <tr>
+      <td>{i}</td>
+      <td>{moment(invoice.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
+      <td>{invoice.customerName}</td>
+      <td>{invoice.totalAmount}</td>
+      <td>{invoice.paidStatus == false? "Pending" : "Paid"}</td>
+    </tr>
+    )
+  })}
+
  
 </table>
     )

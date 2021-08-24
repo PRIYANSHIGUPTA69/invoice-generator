@@ -1,9 +1,8 @@
 module.exports ={
-        apiKey: "AIzaSyCRnpUaSOFWIgrJr8nqWk905pUI1dCmqaE",
-        authDomain: "invoice-generator-ea0dd.firebaseapp.com",
-        projectId: "invoice-generator-ea0dd",
-        storageBucket: "invoice-generator-ea0dd.appspot.com",
-        messagingSenderId: "683962246408",
-        appId: "1:683962246408:web:530cb32d10567ce0fdf8bd"
-      
+        apiKey: "AIzaSyA4JuOApPVSVW3d3ftZBDlR5dBPb1ync4Q",
+    authDomain: "bills-generator-9fc15.firebaseapp.com",
+    projectId: "bills-generator-9fc15",
+    storageBucket: "bills-generator-9fc15.appspot.com",
+    messagingSenderId: "431022339843",
+    appId: "1:431022339843:web:1fd54c32870292dc8e5b36"
 }

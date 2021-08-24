@@ -13,7 +13,6 @@ export default function Signup() {
     (state) => state.auth.authError && state.auth.authError.message
   );
   const { register, handleSubmit, formState:{errors} } = useForm();
-  console.log(errors)
   const handleRegister = (data, e) => {
   
     e.preventDefault();
@@ -44,7 +43,7 @@ export default function Signup() {
               name="lastName"
               id="lastName"
               placeholder="Phalange"
-             {...register("LastName" ,{
+             {...register("lastName" ,{
                 required: true,
                 minLength: 2,
               })}

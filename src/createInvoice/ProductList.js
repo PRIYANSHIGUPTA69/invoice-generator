@@ -2,29 +2,86 @@ import React, { useState, memo } from 'react';
 import Button from '@material-ui/core/Button'
 import ProductListItem from './ProductListItem';
 import AddItem from './AddItem';
+import TotalAmount from "./TotalAmount"
 // Component
 function ProductList(props) {
-    const items = ["pen" , "fruits " , 'books']
+  console.log(props)
+     const [items, setItems] = useState([]);
+  const [showAddItemForm,setShowAddItemForm] = useState(true)
+  const [toggleAddItemForm, setToggleAddItemForm] = useState(true)
+
+  // ADD, DELETE, EDIT
+  const handleAdd = (newItem) => {
+    const newItems = [
+      ...items,
+      {
+        ...newItem,
+        rate: parseFloat(newItem.rate),
+        amount: parseFloat(newItem.amount),
+        disc: parseFloat(newItem.disc),
+        qty: parseFloat(newItem.qty)
+      }
+    ];
+    setItems(newItems);
+    
+    setToggleAddItemForm(!toggleAddItemForm)
+  };
+
+  const handleDelete = (id) => {
+    const newItems = items.filter((item) => item.id !== id);
+    setItems(newItems);
+  };
+
+  const handleEdit = (newItem, id) => {
+    const newItems = items.map((item) => {
+      if (item.id === id)
+        return {
+          ...newItem,
+          rate: parseFloat(newItem.rate),
+          amount: parseFloat(newItem.amount),
+          disc: parseFloat(newItem.disc),
+          qty: parseFloat(newItem.qty)
+        };
+      return item;
+    });
+    setItems(newItems);
+  };
+
+  //Handle UPstreme Data
+  const handleItemsData = (data) => {
+    const itemsObj = { items: items, ...data };
+    props.handleInvoiceSubmit(itemsObj);
+  };
 
   return (
 
-    <div className="create-invoice">
+    <div className="table">
       <h2>Item Details</h2>
-
       {items.map((item) => (
         <ProductListItem
-         
+          key={item.id}
           item={item}
-          
+          handleDelete={handleDelete}
+          currency={props.invoiceMeta.currency}
+          handleEdit={handleEdit}
         />
       ))}
-     
+      {showAddItemForm && (
         <AddItem
-         
+          currency={props.invoiceMeta.currency}
+          handleAdd={handleAdd}
         ></AddItem>
-      
-      <Button  className="addBtn">
-      </Button>
+      )}
+      <button onClick={() =>{setToggleAddItemForm(!toggleAddItemForm)}} className="addBtn">
+        {showAddItemForm ? 'CANCEL' : 'ADD ITEM'}
+      </button>
+      {items.length !== 0 && (
+        <TotalAmount
+          handleItemsData={handleItemsData}
+          items={items}
+          invoiceMeta={props.invoiceMeta}
+        />
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { useSelector } from 'react-redux';
 import Signup from "./Components/user/Signup"
+import Signin from "./Components/user/Signin"
 import Sidebar from './Components/sidebar/Sidebar';
 import CreateInvoice from './createInvoice/CreateInvoice';
 import { Switch , Route , Redirect } from 'react-router';
@@ -32,18 +33,19 @@ const auth = useSelector((state) => state.firebase.auth);
     return (
       <Switch>
         <Route exact path="/register" component={Signup} />
+          <Route exact path="/login" component={Signin} />
       </Switch>
     );
 
   return (
         <div className="App">
-      
-        <Sidebar></Sidebar>
+       <Sidebar></Sidebar>
          
          <Switch>
+       
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/create" component={CreateInvoice} />
-      <Route exact path="/invoices" component={InvoiceDetails} />
+      <Route exact path="/invoices" component={Invoices} />
       <Route exact path="/settings"   component={Settings}/>
       <Route exact path="/settings/edit" component = {EditSetting}/>
       <Route exact path="/invoice/:id"  component={InvoiceDetails}/>

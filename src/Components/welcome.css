@@ -1,0 +1,21 @@
+.welcome{
+    display: flex;
+  justify-content: center;
+  margin-top: 20vh;
+}
+.welcome div {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 2rem;
+}
+.welcome div a {
+      display: block;
+      width: 100%;
+
+}
+.welcome div a img {
+        width: 100%;
+        display: block;
+        margin: 2rem auto;
+}

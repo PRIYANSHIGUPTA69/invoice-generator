@@ -13,6 +13,7 @@ const initState = {
         return { ...state, authError: null };
   
       case 'SIGNUP_SUCCESS':
+        console.log("sucess")
         return { ...state, authError: null };
   
       case 'SIGNUP_ERROR':

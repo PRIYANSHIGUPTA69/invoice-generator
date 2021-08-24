@@ -15,7 +15,7 @@ import { createFirestoreInstance, reduxFirestore } from 'redux-firestore';
 
 let firebaseConfig = require("../secret")
 firebase.initializeApp(firebaseConfig );
-firebase.firestore();
+
 firebase.functions();
 
 console.log(firebaseConfig , firebase)
@@ -27,6 +27,11 @@ const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true
 };
+export const firestore = firebase.firestore();
+export const database = {
+  users: firestore.collection("users"),
+   getUserTimeStamp: firebase.firestore.FieldValue.serverTimestamp
+}
 
 export const store = createStore(
   rootReducer,

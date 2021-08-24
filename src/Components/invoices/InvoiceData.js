@@ -1,11 +1,18 @@
-import React from 'react'
+import React , {useState , useEffect} from 'react'
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import "./data.css"
+import { getFirebase } from 'react-redux-firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { isLoaded } from 'react-redux-firebase';
 export default function InvoiceData(props) {
-    let companyName = "usthaan", gstNumber="10", companyAddress="mumbai",  customerName="abc gupta", customerAddress ="abc"
-   let email = "abc@gmail.com" , invoiceNumber=10, currency="IND", note="welcome" 
+  const id = props.id
+  const invoice = props.invo;
+  console.log(invoice)
+  
+ 
     const {
-       /* companyName,
+       companyName,
         gstNumber,
         companyAddress,
         customerName,
@@ -15,20 +22,20 @@ export default function InvoiceData(props) {
         dueDate,
         invoiceNumber,
         currency,
-        note,*/
+        note,
         taxEnable,
         taxType,
         taxPercent,
-       
+        items,
         totalAmount,
         totalExclusiveTax,
         totalInclusiveTax,
         totalWithExclusiveTax,
         paidStatus,
         billableType
-      } = props;
+      } = props.invo;
+      console.log(note)
       const currencySign = currency === 'usd' ? '$' : '₹';
-      const items = [{ itemName:"pen", rate:10, qty:2, disc:4, amount:20, id:2 }]
       const itemList = items.map(({ itemName, rate, qty, disc, amount, id }, i) => (
         <div className="billRow" key={id}>
           <div className="billDataNum">{i + 1}</div>
@@ -48,19 +55,19 @@ export default function InvoiceData(props) {
               <p>{companyAddress}</p>
               <div className="invoiceNumber">{gstNumber && `GSTIN: ${gstNumber}`}</div>
               <div className="date">
-               {/*} <p>
-                  Invoice Date :{' '}
-                  {/*moment(invoiceDate.toDate()).format('DD-MM-YYYY')}
-    </p>
-                <p>Due Date : {/moment(dueDate.toDate()).format('DD-MM-YYYY')}</p>*/}
-                <p>
-                  Status :{' '}
-                  {paidStatus ? (
-                    <span style={{ color: '#219735' }}>Fulfilled</span>
-                  ) : (
-                    <span style={{ color: '#FD5665' }}>Pending</span>
-                  )}
-                </p>
+              <p>
+                Invoice Date :{' '}
+                {moment(invoiceDate.toDate()).format('DD-MM-YYYY')}
+              </p>
+              <p>Due Date : {moment(dueDate.toDate()).format('DD-MM-YYYY')}</p>
+              <p>
+                Status :{' '}
+                {paidStatus ? (
+                  <span style={{ color: '#219735' }}>Fulfilled</span>
+                ) : (
+                  <span style={{ color: '#FD5665' }}>Pending</span>
+                )}
+              </p>
               </div>
             </div>
   
@@ -101,27 +108,54 @@ export default function InvoiceData(props) {
                 <div className="billColumn" style={{ textAlign: 'right' }}>
                   <p>
                     {currencySign}{' '}
-                   
+                    {totalAmount.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  })}
                   </p>
                   {taxEnable === 'true' && taxType === 'exc' && (
                     <>
-                     
+                     <p>
+                     {totalExclusiveTax.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      })}
+                     </p>
+                     <p>
+                      {currencySign}{' '}
+                      {totalWithExclusiveTax.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      })}
+                    </p>
                     </>
                   )}
                   {taxEnable === 'true' && taxType === 'inc' && (
                     <>
-                      <p>
-                        {currencySign}{' '}
-                      </p>
-  
-                      <p>
-                        {currencySign}{' '}
-                      </p>
+                       <p>
+                      {currencySign}{' '}
+                      {totalAmount.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      })}
+                    </p>
+
+                    <p>
+                      {currencySign}{' '}
+                      {totalInclusiveTax.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      })}
+                    </p>
                     </>
                   )}
                   {taxEnable === 'false' && (
                     <p>
                       {currencySign}{' '}
+                      {totalAmount.toLocaleString('en-US', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })}
                     </p>
                   )}
                 </div>

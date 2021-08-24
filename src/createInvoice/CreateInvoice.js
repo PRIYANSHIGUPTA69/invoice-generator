@@ -1,20 +1,124 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Header from "../Components/header/Header";
 import TextField from "@material-ui/core/TextField";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers";
+import { useForm } from 'react-hook-form';
 import MomentUtils from "@date-io/moment";
+import { isLoaded } from 'react-redux-firebase';
+import { useSelector, useDispatch } from 'react-redux';
 import "./createInvoice.css";
 import AddItem from "./AddItem";
 import ProductList from "./ProductList";
-function CreateInvoice() {
+import {createInvoice} from "../redux/actions/invoiceActions"
+import CreatePageLoader from "./createPageLoader";
+function CreateInvoice(props) {
+   const { register, handleSubmit, formState:{errors} } = useForm();
+   const dispatch = useDispatch();
+  const settings = useSelector(
+    (state) => state.firebase.profile && state.firebase.profile.settings
+  );
+  console.log(settings)
+  const [form, setForm] = useState(
+    {
+      companyName:"" ,
+      companyAddress:"" ,
+      gstNumber:"" , 
+      customerName:"" , 
+      customerAddress:" " , 
+      email:"" , 
+      invoiceNum:"1",
+      taxPercent: '18',
+      note:"welocome" 
+    }
+  );
+
+       const updateFrom = (e) => {
+      console.log(e.target.name)
+      setForm({ ...form, [e.target.name]: e.target.value });
+    };
+  const invoiceNum = useSelector(
+    (state) => state.firebase.profile && state.firebase.profile.currentInvoice
+  );
+
+    const [invoiceMeta, setInvoiceMeta] = useState({
+    invoiceDate: new Date(),
+    dueDate: new Date(),
+    billableType: 'product',
+    taxType: 'exc',
+    taxPercent: '18',
+    taxEnable: 'true',
+    currency: 'inr',
+    companyAddress: '',
+    companyName: '',
+    gstNumber: ''
+  });
+
+  // Set Default Form State
+  useEffect(() => {
+    if (settings){
+      setInvoiceMeta({
+        ...invoiceMeta,
+        currency: settings.currency,
+        billableType: settings.billableType,
+        taxType: settings.taxType,
+        taxPercent: settings.taxPercent,
+        taxEnable: settings.taxEnable,
+        companyAddress: settings.companyAddress,
+        companyName: settings.companyName,
+        gstNumber: settings.gstNumber
+      });
+
+       setForm({
+          companyAddress: settings.companyAddress,
+          companyName: settings.companyName,
+          gstNumber: settings.gstNumber,
+          customerName:"" , 
+          customerAddress:" " , 
+          email:"" , 
+          invoiceNum:"1",
+          taxPercent: '18',
+          note:settings.note
+        }
+      );
+    }
+      console.log(settings)
+  }, [settings]);
+
+  if(!settings){
+    return (
+      <CreatePageLoader></CreatePageLoader>
+    )
+  }
+  const handleInvoiceMeta = (e) => {
+    setInvoiceMeta({ ...invoiceMeta, [e.target.name]: e.target.value });
+  };
+  const handleDueDateChange = (e) => {
+    setInvoiceMeta({ ...invoiceMeta, dueDate: e._d });
+  };
+  const handleInvoiceDateChange = (e) => {
+    setInvoiceMeta({ ...invoiceMeta, invoiceDate: e._d });
+  };
+    // Submiting Invoice Details
+  const handleInvoiceSubmit = (metaData) => {
+    
+      const finalObj = {
+        ...form,
+        ...metaData,
+        dueDate: invoiceMeta.dueDate,
+        invoiceDate: invoiceMeta.invoiceDate,
+        paidStatus: false,
+        remindedAt: new Date()
+      };
+      dispatch(createInvoice(finalObj));
+      
+   
+  };
   return (
     <div className="create-invoice">
       <Header title="Create invoice"></Header>
       <div className="invoice-container">
+       
         <Grid
           container
           justify="center"
@@ -32,6 +136,10 @@ function CreateInvoice() {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+                value = {form.companyName}
+                 required
+                 onChange= {updateFrom}
+
               />
               <TextField
                 label="GST Number"
@@ -40,6 +148,9 @@ function CreateInvoice() {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+                required
+                value={form.gstNumber}
+                onChange= {updateFrom}
               />
               <TextField
                 label="Address"
@@ -48,6 +159,9 @@ function CreateInvoice() {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+                value={form.companyAddress}
+                onChange= {updateFrom}
+                required
               />
             </div>
           </Grid>
@@ -62,6 +176,9 @@ function CreateInvoice() {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+               value={form.customerName}
+               onChange= {updateFrom}
+               required
               />
               <TextField
                 label="Address"
@@ -69,7 +186,8 @@ function CreateInvoice() {
                 size="small"
                 fullWidth
                 variant="outlined"
-                margin="dense"
+                value={form.customerAddress}
+                onChange= {updateFrom}
               />
               <TextField
                 label="Email"
@@ -80,6 +198,9 @@ function CreateInvoice() {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+                value={form.email}
+                required
+                onChange= {updateFrom}
               />
             </div>
           </Grid>
@@ -94,9 +215,17 @@ function CreateInvoice() {
                   label="Date"
                   name="Date"
                   size="small"
-                  fullWidth
+                   fullWidth
                   inputVariant="outlined"
                   format="DD/MM/YYYY"
+                  value={invoiceMeta.invoiceDate}
+                  onChange={handleInvoiceDateChange}
+                  name="invoiceDate"
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date'
+                  }}
+
+              
                 />
                 <KeyboardDatePicker
                   margin="dense"
@@ -107,6 +236,13 @@ function CreateInvoice() {
                   fullWidth
                   inputVariant="outlined"
                   format="DD/MM/YYYY"
+                  value={invoiceMeta.dueDate}
+                  onChange={handleDueDateChange}
+                  name="dueDate"
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date'
+                  }}
+              
                 />
               </MuiPickersUtilsProvider>
               <TextField
@@ -116,6 +252,9 @@ function CreateInvoice() {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+                value={form.invoiceNum}
+                onChange= {updateFrom}
+                required
               />
             </div>
           </Grid>
@@ -136,6 +275,9 @@ function CreateInvoice() {
                         value="product"
                         id="product"
                         name="billableType"
+                        checked={invoiceMeta.billableType === 'product'}
+                        onChange={handleInvoiceMeta}
+                        checked={invoiceMeta.currency === 'inr'}
                       />
                       <label htmlFor="product">Product</label>
                     </div>
@@ -145,6 +287,8 @@ function CreateInvoice() {
                         value="service"
                         id="service"
                         name="billableType"
+                        checked={invoiceMeta.billableType === 'service'}
+                        onChange={handleInvoiceMeta}
                       />
                       <label htmlFor="service">Service</label>
                     </div>
@@ -161,6 +305,8 @@ function CreateInvoice() {
                         value="inr"
                         id="inr"
                         name="currency"
+                         onChange={handleInvoiceMeta}
+                        checked={invoiceMeta.currency === 'inr'}
                       />
                       <label htmlFor="inr">INR</label>
                     </div>
@@ -170,6 +316,8 @@ function CreateInvoice() {
                         value="usd"
                         id="usd"
                         name="currency"
+                         checked={invoiceMeta.currency === 'usd'}
+                        onChange={handleInvoiceMeta}
                       />
                       <label htmlFor="usd">USD</label>
                     </div>
@@ -187,6 +335,9 @@ function CreateInvoice() {
                     fullWidth
                     variant="outlined"
                     margin="dense"
+                    value={form.note}
+                    onChange= {updateFrom}
+
                   />
                 </div>
               </Grid>
@@ -205,19 +356,23 @@ function CreateInvoice() {
                   <div id="group1" className="radio-group">
                     <div className="radioInput">
                       <input
-                        type="radio"
+                           type="radio"
                         value={true}
                         id="taxTrue"
                         name="taxEnable"
+                        checked={invoiceMeta.taxEnable === 'true'}
+                        onChange={handleInvoiceMeta}
                       />
                       <label htmlFor="taxTrue">Yes</label>
                     </div>
                     <div className = "radioInput">
                       <input
-                        type="radio"
+                          type="radio"
                         value={false}
                         id="taxFalse"
                         name="taxEnable"
+                        checked={invoiceMeta.taxEnable === 'false'}
+                        onChange={handleInvoiceMeta}
                       />
                       <label htmlFor="taxFalse">No</label>
                     </div>
@@ -234,6 +389,8 @@ function CreateInvoice() {
                             value="exc"
                             id="taxTypeExc"
                             name="taxType"
+                            checked={invoiceMeta.taxType === 'exc'}
+                            onChange={handleInvoiceMeta}
                           />
                           <label htmlFor="taxTypeExc">Exclusive</label>
                         </div>
@@ -243,6 +400,9 @@ function CreateInvoice() {
                             value="inc"
                             id="taxTypeInc"
                             name="taxType"
+                            name="taxType"
+                            checked={invoiceMeta.taxType === 'inc'}
+                            onChange={handleInvoiceMeta}
                           />
                           <label htmlFor="taxTypeInc">Inclusive</label>
                         </div>
@@ -261,13 +421,19 @@ function CreateInvoice() {
                         fullWidth
                         variant="outlined"
                         margin="dense"
+                        value={form.taxPercent}
+                        onChange= {updateFrom}
                       />
                     </div>
                   </Grid>
             </Grid>
           </Grid>
           </Grid>
-       <ProductList></ProductList>
+       <ProductList   
+           invoiceMeta={invoiceMeta}
+          handleInvoiceSubmit={handleInvoiceSubmit}
+       ></ProductList>
+   
       </div>
     </div>
   );

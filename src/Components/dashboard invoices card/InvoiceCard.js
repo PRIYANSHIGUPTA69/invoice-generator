@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 function InvoiceCard(props) {
-    const {Icon , type , number , color} = props
+ 
+    const {Icon , type , number , color , path} = props
+    let no =  number == undefined ? 0 : number
     let stylingObject = {
         div:{ 
             width:"270px",
@@ -39,14 +41,14 @@ function InvoiceCard(props) {
          }
       }
     return (
-        <Link as={Link} to={'/create'} style={stylingObject.div} >
+        <Link as={Link} to= {path} style={stylingObject.div} >
         <div className="icon">
             <Icon style ={stylingObject.i}></Icon>
         
         </div>
         <div className="widget-text">
           <h2 style ={stylingObject.h2}>{type}</h2>
-          <p style ={stylingObject.p}>Total Invoices:{number} </p>
+          <p style ={stylingObject.p}>Total Invoices: {no} </p>
         </div>
       </Link>
     )

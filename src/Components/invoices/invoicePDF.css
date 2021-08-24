@@ -1,0 +1,81 @@
+.billPage {
+  padding: 80px 40px;
+  font-family: 'Noto Sans';
+}
+.billDetails{
+    display: table;
+    width: auto;
+    margin: 0 auto;
+    flex-direction: row;
+}
+
+.billColumnLeft {
+  width: 50%;
+  padding-right: 50px;
+  padding-left: 0px;
+
+  text-align: left;
+}
+.billColumnRight {
+  padding-left: 50px;
+  padding-right: 0px;
+  text-align: right;
+}
+
+.invoiceHeading {
+  font-size: 30px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: right;
+  width: 100%;
+}
+.invoiceNumber{
+  color: #444;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.details{
+  font-size: 12;
+  padding: 5px 0;
+  line-height: 1.2;
+}
+
+.textt{
+  padding: 5px 0;
+}
+
+.billTable{
+  display: table;
+  width: 100%;
+}
+.billRow{
+  margin: 0 auto;
+  flex-direction: row;
+  padding: 8px 0;
+}
+.billRowHead{
+  background-color: #333;
+  font-size: 15px;
+  border-radius: 2px;
+  color: white;
+}
+.billDataText{
+  width: 50%;
+  padding: 0 5px;
+  font-size: 12px;
+}
+.billDataNum{
+  width: 15%;
+  text-align: right;
+  padding: 0 5px;
+  font-size: 12px;
+}
+.billDataSerial{
+  width: 5%;
+}
+.billTotal{
+  padding: 0;
+}
