@@ -9,16 +9,13 @@ import { isLoaded } from 'react-redux-firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import "./createInvoice.css";
 import AddItem from "./AddItem";
+import { getFirebase } from 'react-redux-firebase';
 import ProductList from "./ProductList";
 import {createInvoice} from "../redux/actions/invoiceActions"
 import CreatePageLoader from "./createPageLoader";
 function CreateInvoice(props) {
-   const { register, handleSubmit, formState:{errors} } = useForm();
    const dispatch = useDispatch();
-  const settings = useSelector(
-    (state) => state.firebase.profile && state.firebase.profile.settings
-  );
-  console.log(settings)
+  const [settings , setSetting] = useState()
   const [form, setForm] = useState(
     {
       companyName:"" ,
@@ -27,19 +24,16 @@ function CreateInvoice(props) {
       customerName:"" , 
       customerAddress:" " , 
       email:"" , 
-      invoiceNum:"1",
+      invoiceNum:"",
       taxPercent: '18',
       note:"welocome" 
     }
   );
-
+  const firestore = getFirebase().firestore();
        const updateFrom = (e) => {
-      console.log(e.target.name)
       setForm({ ...form, [e.target.name]: e.target.value });
     };
-  const invoiceNum = useSelector(
-    (state) => state.firebase.profile && state.firebase.profile.currentInvoice
-  );
+
 
     const [invoiceMeta, setInvoiceMeta] = useState({
     invoiceDate: new Date(),
@@ -54,8 +48,15 @@ function CreateInvoice(props) {
     gstNumber: ''
   });
 
-  // Set Default Form State
   useEffect(() => {
+    let inv = firestore.collection('users').get().then(snapshot => {
+      let values = snapshot.docs.map(doc => {
+        return doc.data()
+      });
+     if(values[0].settings != undefined){
+       setSetting(values[0].settings)
+     }
+     })
     if (settings){
       setInvoiceMeta({
         ...invoiceMeta,
@@ -77,19 +78,19 @@ function CreateInvoice(props) {
           customerAddress:" " , 
           email:"" , 
           invoiceNum:"1",
-          taxPercent: '18',
+          taxPercent: settings.taxPercent,
           note:settings.note
         }
       );
     }
-      console.log(settings)
-  }, [settings]);
-
-  if(!settings){
-    return (
-      <CreatePageLoader></CreatePageLoader>
-    )
-  }
+    console.log("render")
+  }, []);
+console.log(settings)
+ if(settings == undefined){
+   return (
+     <p>Loading!!</p>
+   )
+ }
   const handleInvoiceMeta = (e) => {
     setInvoiceMeta({ ...invoiceMeta, [e.target.name]: e.target.value });
   };
@@ -110,8 +111,7 @@ function CreateInvoice(props) {
         paidStatus: false,
         remindedAt: new Date()
       };
-      dispatch(createInvoice(finalObj));
-      
+     dispatch(createInvoice(finalObj));
    
   };
   return (
@@ -136,6 +136,7 @@ function CreateInvoice(props) {
                 fullWidth
                 variant="outlined"
                 margin="dense"
+                error={form.companyName == "" && true}
                 value = {form.companyName}
                  required
                  onChange= {updateFrom}
@@ -149,6 +150,7 @@ function CreateInvoice(props) {
                 variant="outlined"
                 margin="dense"
                 required
+                error={form.gstNumber == "" && true}
                 value={form.gstNumber}
                 onChange= {updateFrom}
               />
@@ -160,6 +162,7 @@ function CreateInvoice(props) {
                 variant="outlined"
                 margin="dense"
                 value={form.companyAddress}
+                error={form.companyAddress == "" && true}
                 onChange= {updateFrom}
                 required
               />
@@ -176,9 +179,11 @@ function CreateInvoice(props) {
                 fullWidth
                 variant="outlined"
                 margin="dense"
-               value={form.customerName}
+              
                onChange= {updateFrom}
                required
+               value={form.customerName}
+               error={form.customerName == ""  && true}
               />
               <TextField
                 label="Address"
@@ -187,6 +192,7 @@ function CreateInvoice(props) {
                 fullWidth
                 variant="outlined"
                 value={form.customerAddress}
+                error={form.customerAddress == "" && true}
                 onChange= {updateFrom}
               />
               <TextField
@@ -199,7 +205,8 @@ function CreateInvoice(props) {
                 variant="outlined"
                 margin="dense"
                 value={form.email}
-                required
+                error={form.email == "" && true}
+               
                 onChange= {updateFrom}
               />
             </div>
@@ -255,6 +262,7 @@ function CreateInvoice(props) {
                 value={form.invoiceNum}
                 onChange= {updateFrom}
                 required
+                error={form.invoiceNum == "" && true}
               />
             </div>
           </Grid>
@@ -277,7 +285,7 @@ function CreateInvoice(props) {
                         name="billableType"
                         checked={invoiceMeta.billableType === 'product'}
                         onChange={handleInvoiceMeta}
-                        checked={invoiceMeta.currency === 'inr'}
+                      
                       />
                       <label htmlFor="product">Product</label>
                     </div>

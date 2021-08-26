@@ -7,7 +7,6 @@ import {nanoid} from 'nanoid';
 function AddItem(props) {
  const [form, setForm] = useState({ itemName: '', rate: '', disc: 0, qty: 1  });
   const updateFrom = (e) => {
-    console.log(e.target.name)
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
@@ -23,7 +22,6 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
       qty : form.qty,
       amount:amount
     }
-    console.log(data)
      props.handleAdd(data);
   }
   return (
@@ -39,6 +37,8 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
           margin="dense"
           value = {form.itemName}
           onChange={updateFrom}
+          required
+          error={form.itemName == "" && true}
         />
       </Grid>
       <Grid item xs={8} md={2} lg={2}>
@@ -51,6 +51,8 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
            fullWidth
             value = {form.rate}
           onChange={updateFrom}
+          required
+          error={form.rate== "" && true}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">

@@ -47,3 +47,39 @@ export const signUp = (newUser) => {
       .catch((err) => dispatch({ type: 'LOGIN_ERROR', err }))
   };
 };
+
+export const updateSetting = (newSetting) => {
+  return (dispatch, getState, { getFirebase }) => {
+    dispatch({ type: 'SETTING_BUTTON', payload: true });
+    console.log(newSetting)
+    const uid = getState().firebase.auth.uid;
+
+    const firestore = getFirebase().firestore();
+
+   firestore
+      .collection('users')
+      .doc(uid)
+      .update({
+        settings: {...newSetting}
+      })
+      .then(() => {
+        history.push('/settings');
+        dispatch({ type: 'SETTINGS_SUCCESS_BAR' });
+        dispatch({ type: 'SETTING_BUTTON', payload: false });
+      });
+  };
+};
+
+export const signOut = () => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({ type: 'LOGOUT_SUCCESS' });
+        history.push('/login');
+      });
+  };
+};

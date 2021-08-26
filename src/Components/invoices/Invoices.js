@@ -9,7 +9,7 @@ function Invoices() {
   const firestore = getFirebase().firestore();
   const dispatch = useDispatch();
   useEffect(async () => {
-    let inv = firestore.collection('users').doc(auth).collection("invoices").get().then(snapshot => {
+    let inv = firestore.collection('users').doc(auth).collection("invoices").orderBy("invoiceDate", "desc").get().then(snapshot => {
      let values = snapshot.docs.map(doc => {
         return doc.data()
      });
@@ -24,7 +24,7 @@ function Invoices() {
   }
   console.log(invoice)
   return (
-    <div>
+    <div style={{width:"100%"}}>
       <Header title={'Invoices'} />
       <div style={{ padding: '1rem' }}>
         <Table invoice={invoice}></Table>

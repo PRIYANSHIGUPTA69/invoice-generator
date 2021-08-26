@@ -38,22 +38,24 @@ const auth = useSelector((state) => state.firebase.auth);
     );
 
   return (
-        <div className="App">
-       <Sidebar></Sidebar>
-         
+        <div className="container">
+       <Sidebar className ="sidebar"></Sidebar>
+         <div classname="component" style={{position: "absolute" , left: "300px"}}>
          <Switch>
        
-      <Route exact path="/" component={Dashboard} />
-      <Route exact path="/create" component={CreateInvoice} />
-      <Route exact path="/invoices" component={Invoices} />
-      <Route exact path="/settings"   component={Settings}/>
-      <Route exact path="/settings/edit" component = {EditSetting}/>
-      <Route exact path="/invoice/:id"  component={InvoiceDetails}/>
-      <Route exact path="/register" render={() => <Redirect to="/" />} />
-      <Route exact path="/login" render={() => <Redirect to="/" />} />
-    
-      
-    </Switch>
+       <Route exact path="/" component={Dashboard} />
+       <Route exact path="/create" component={CreateInvoice} />
+       <Route exact path="/invoices" component={Invoices} />
+       <Route exact path="/settings"   component={Settings}/>
+       <Route exact path="/settings/edit" component = {EditSetting}/>
+       <Route exact path="/invoice/:id"  component={InvoiceDetails}/>
+       <Route exact path="/register" render={() => <Redirect to="/" />} />
+       <Route exact path="/login" render={() => <Redirect to="/" />} />
+     
+       
+     </Switch>
+         </div>
+        
         </div>
   );
 }

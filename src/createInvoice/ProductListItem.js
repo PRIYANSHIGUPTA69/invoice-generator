@@ -12,7 +12,6 @@ function ProductListItem(props) {
 
 let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
      const updateFrom = (e) => {
-    console.log(e.target.name)
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -48,6 +47,9 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
           margin="dense"
           value = {form.itemName}
           onChange={updateFrom}
+          required
+          disabled={!isEditing}
+          error={form.itemName == "" && true}
         />
       </Grid>
       <Grid item xs={8} md={2} lg={2}>
@@ -60,6 +62,9 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
            fullWidth
             value = {form.rate}
           onChange={updateFrom}
+          disabled={!isEditing}
+          required
+          error={form.rate == "" && true}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -80,6 +85,7 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
           fullWidth
            value = {form.disc}
           onChange={updateFrom}
+          disabled={!isEditing}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -100,6 +106,7 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
           fullWidth
            value = {form.qty}
           onChange={updateFrom}
+          disabled={!isEditing}
         />
       </Grid>
       <Grid item xs={8} md={2} lg={2}>
@@ -118,6 +125,7 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
               </InputAdornment>
             )
           }}
+          disabled={!isEditing}
         />
       </Grid>
       <Grid item xs={12} md={2} lg={2}>

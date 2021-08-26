@@ -1,9 +1,9 @@
 .appbar{
     width: 100%;
   display: flex;
-  justify-content: space-between;
+ justify-content: space-between;
   padding-left:2rem;
-  font-size: 1.1rem;
+  font-size: 38px;
   align-items: center;
   border-bottom: rgba(0, 0, 0, 0.05) solid 1px;
 
@@ -11,6 +11,22 @@
 
 
   .MuiIconButton-root {
-    font-size: 2rem;
-    float: right;
+    font-size: 38px;
+   
+}
+.header-left-part{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width:600px
+}
+.right-header-part button{
+  color: #24B47E;
+  background-color: white;
+  width: 200px;
+  height: 3rem;
+  font-size: 38px;
+  font-weight: 600;
+  float: right;
+  margin-right: 59px;
 }

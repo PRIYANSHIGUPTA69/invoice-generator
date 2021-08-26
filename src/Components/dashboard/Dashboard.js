@@ -11,29 +11,38 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Welcome from "../Welcome"
 import {getFirebase} from "react-redux-firebase"
+import Graph from '../graph/Graph';
 function Dashboard() {
   const auth = useSelector((state) => state.firebase.auth.uid);
+  const [dataObj , setData] = useState()
   const [invoice , setInvoice] = useState()
   const firestore = getFirebase().firestore();
   const dispatch = useDispatch();
   useEffect(async () => {
     let inv = firestore.collection('users').doc(auth).collection("invoices").get().then(snapshot => {
      let values = snapshot.docs.map(doc => {
-     
-        return doc.data()
+        let obj = {data:doc.data() , id:doc.id}
+        console.log(obj)
+        return obj
      });
-    setInvoice(values)
-     console.log(invoice)
+     let invo = []
+     for(let i=0; i<values.length ;i++){
+       invo.push(values[i].data)
+     }
+     
+    setInvoice(invo)
+    setData(values)
+     
     })
     
    }, [])
-  if(invoice == undefined){
-    console.log(invoice)
+  if(invoice == undefined || dataObj == undefined){
+   
     return (
       <p>Loading!!</p>
     )
   }
- 
+  console.log(invoice ,  dataObj)
   let paidInvoices , pendingInvoices
  paidInvoices = invoice.filter(invoice => {
    return invoice.paidStatus== true
@@ -41,7 +50,6 @@ function Dashboard() {
  pendingInvoices = invoice.filter(invoice => {
   return invoice.paidStatus== false
 })
-console.log(invoice , pendingInvoices , paidInvoices)
 
 
   return (
@@ -85,11 +93,11 @@ console.log(invoice , pendingInvoices , paidInvoices)
             <h2>Recent Invoicces</h2>
             <Link>View Alll</Link>
           </div>
-         
+         <Table invoice={dataObj} dashboard={true}></Table>
         </Grid>
         <Hidden mdDown>
           <Grid item md={3} lg={3}>
-            
+            <Graph paidInvoices={paidInvoices.length} pendingInvoices={pendingInvoices.length}></Graph>
           </Grid>
         </Hidden>
   </Grid>

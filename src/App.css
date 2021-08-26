@@ -1,7 +1,34 @@
-.App {
-  text-align: center;
-  display: flex;
+
+.conatiner{
+  position: relative;
+  height: 100%;
 }
-.App:nth-child(2){
- position: relative;
+.sidebar{
+  position: fixed;
+    height: 100%;
+    width: 300px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 7;
+}
+.component {
+  position: fixed;
+  height: 100%;
+  left: 300px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto
+}
+@media screen and (max-width: 960px) {
+  .sidebar{
+    display: none;
+  }
+  .component {
+    left: 0;
+    width: 100%;
+    padding-bottom: 60px;
+  }
 }

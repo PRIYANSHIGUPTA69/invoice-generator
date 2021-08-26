@@ -1,14 +1,18 @@
 import React from 'react'
 import './table.css'
 import moment from 'moment';
+import {Link} from "react-router-dom"
 function Table(props) {
-  const invoices = props.invoice;
-  let i=0;
+  console.log(props)
+  const invoices = props.invoice
   console.log(invoices)
+  const dashboard = props.hasOwnProperty("dashboard")?true:false
+  let i=0;
+  console.log(dashboard)
     return (
         <table className='table'>
-  <tr className="table-head">
-  <th className="number">No.</th>
+      <tr className="table-head">
+      <th className="number">No.</th>
         <th className="date">Date</th>
         <th className="name">Name</th>
         <th className="amount">Amount</th>
@@ -17,15 +21,36 @@ function Table(props) {
   </tr>
   {invoices.map(invoice => {
     i++
-    return (
-      <tr>
-      <td>{i}</td>
-      <td>{moment(invoice.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
-      <td>{invoice.customerName}</td>
-      <td>{invoice.totalAmount}</td>
-      <td>{invoice.paidStatus == false? "Pending" : "Paid"}</td>
-    </tr>
-    )
+    if(dashboard === true){
+      if(i < 5){
+        return (
+          <Link to = {`/invoice/${invoice.id}`} > 
+          <tr>
+          <td>{i}</td>
+          <td>{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
+          <td>{invoice.data.customerName}</td>
+          <td>{invoice.data.totalAmount}</td>
+          <td>{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
+        
+        </tr>
+        </Link>
+        )
+      }
+    }else{
+      return (
+        <Link to = {`/invoice/${invoice.id}`} > 
+          <tr>
+          <td>{i}</td>
+          <td>{moment(invoice.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
+          <td>{invoice.customerName}</td>
+          <td>{invoice.totalAmount}</td>
+          <td>{invoice.paidStatus == false? "Pending" : "Paid"}</td>
+        
+        </tr>
+        </Link>
+      )
+    }
+   
   })}
 
  

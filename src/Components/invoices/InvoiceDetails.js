@@ -48,7 +48,7 @@ export default function InvoiceDetails(props) {
    )
  }
   const handleDeleteInvoice = () => {
-    dispatch(confirmDeleteAction(deleteInovice(id)));
+    dispatch((deleteInovice(id)));
   };
 
   const handleEmailInvoice = () => {
@@ -56,8 +56,9 @@ export default function InvoiceDetails(props) {
   };
 
   const handlePaymentStatus = () => {
+    console.log(!invoice.paidStatus)
     dispatch(
-      confirmPaymentChangeAction(updatePaymentStatus(id, !invoice.paidStatus))
+      updatePaymentStatus(id, !invoice.paidStatus)
     );
 
    
@@ -69,7 +70,7 @@ export default function InvoiceDetails(props) {
       <div className="ButtonDiv">
         <button className="Yellow"
         onClick={handlePaymentStatus}
-          disabled={invoice}
+         
           color="#fda734"
         >
         
@@ -81,19 +82,23 @@ export default function InvoiceDetails(props) {
 
         <button className="primary" 
           onClick={handleEmailInvoice}
-          disabled={invoice || invoice.paidStatus }
+         
         >
           <SendIcon></SendIcon>  <span>Send Email</span>
         </button>
 
         <button className="secondary"  >
           <PDFDownloadLink document={<InvoicePDF invoice={invoice} />} fileName={invoice.invoiceNumber}>
-      {({ blob, url, loading, error }) => (<> <GetAppIcon /> {' '} {loading ? 'Loading document...' : 'Download now!'}</>)}
+      {({ blob, url, loading, error }) => (<>  {!loading && setPdfUrl(url)} <GetAppIcon /> {' '} {loading ? 'Loading document...' : 'Download now!'}</>)}
         </PDFDownloadLink>
       </button>
 
-        <button className="secondary" as="a" href={pdfUrl} target="_blank">
-          <PrintIcon></PrintIcon> <span>Print</span>
+        <button className="secondary" onClick={() => {
+          window.open(pdfUrl)
+        
+        }} >
+          <PrintIcon></PrintIcon><span>Print</span>
+         
         </button>
         <button className="danger" onClick={handleDeleteInvoice}>
           <DeleteOutlineIcon></DeleteOutlineIcon> <span>Delete</span>

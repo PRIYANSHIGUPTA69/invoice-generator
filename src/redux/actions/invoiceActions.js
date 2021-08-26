@@ -28,7 +28,7 @@ export const createInvoice = (invoiceDetails) => (
         .update({ currentInvoice: currInvoice + 1 });
     })
     .then((res) => {
-      dispatch({ type: 'CREATE_INVOICE', payload: invoiceDetails });
+      dispatch({ type: 'CREATE_INVOICE', payload:{ invoiceDetails:invoiceDetails ,path:path } })
       history.push(`/invoice/${path}`);
     })
     .catch((err) => {
@@ -36,6 +36,7 @@ export const createInvoice = (invoiceDetails) => (
       dispatch({ type: 'WENTWRONG_BAR' });
     })
     .finally(() => dispatch({ type: 'CREATE_BUTTON', payload: false }));
+    
 };
 
 /* ******************* Delete Invoice ******************* */
@@ -60,6 +61,7 @@ export const deleteInovice = (invoiceId) => (
   if (history.location.pathname !== '/') {
     history.push('/invoices');
   }
+  
 };
 
 /* **************** Change Payment Status *************** */

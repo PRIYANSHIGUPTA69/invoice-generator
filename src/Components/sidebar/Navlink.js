@@ -10,11 +10,7 @@ function Navlink(props) {
       fontSize:"1rem",
       fontWeight:"bold"
     },
-    hover: {
-      boxShadow: `3px 3px 12px ${color}`,
-
-      
-    },
+   
   };
   const onHover = (e) => {
     e.target.style.boxShadow = `3px 3px 12px ${color}`;
@@ -29,10 +25,10 @@ function Navlink(props) {
       to="/"
       color={color}
       to={to}
-      onMouseEnter={onHover}
-      onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
+     
     >
-      <div style={stylingObject.display}>
+      <div style={stylingObject.display}  onMouseEnter={onHover}
+      onMouseLeave={(e) => {e.target.style.boxShadow = "none"}}>
       <span style={stylingObject.color}>
        <Icon/>
       </span>
