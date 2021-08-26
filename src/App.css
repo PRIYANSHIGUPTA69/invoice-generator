@@ -6,7 +6,7 @@
 .sidebar{
   position: fixed;
     height: 100%;
-    width: 300px;
+    width: 250px;
     left: 0;
     top: 0;
     bottom: 0;
@@ -16,7 +16,7 @@
 .component {
   position: fixed;
   height: 100%;
-  left: 300px;
+  width:calc(100vw - 200px);
   top: 0;
   bottom: 0;
   right: 0;

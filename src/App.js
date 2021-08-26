@@ -40,7 +40,7 @@ const auth = useSelector((state) => state.firebase.auth);
   return (
         <div className="container">
        <Sidebar className ="sidebar"></Sidebar>
-         <div classname="component" style={{position: "absolute" , left: "300px"}}>
+         <div classname="component" style={{position: "absolute" , left: "250px"}}>
          <Switch>
        
        <Route exact path="/" component={Dashboard} />
