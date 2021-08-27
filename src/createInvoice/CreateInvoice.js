@@ -3,9 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../Components/header/Header";
 import TextField from "@material-ui/core/TextField";
 import { MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers";
-import { useForm } from 'react-hook-form';
 import MomentUtils from "@date-io/moment";
-import { isLoaded } from 'react-redux-firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import "./createInvoice.css";
 import AddItem from "./AddItem";
@@ -13,7 +11,9 @@ import { getFirebase } from 'react-redux-firebase';
 import ProductList from "./ProductList";
 import {createInvoice} from "../redux/actions/invoiceActions"
 import CreatePageLoader from "./createPageLoader";
+import { useHistory } from "react-router-dom";
 function CreateInvoice(props) {
+  const history = useHistory()
    const dispatch = useDispatch();
   const [settings , setSetting] = useState()
   const [form, setForm] = useState(
@@ -55,38 +55,41 @@ function CreateInvoice(props) {
       });
      if(values[0].settings != undefined){
        setSetting(values[0].settings)
-     }
-     })
-    if (settings){
-      setInvoiceMeta({
-        ...invoiceMeta,
-        currency: settings.currency,
-        billableType: settings.billableType,
-        taxType: settings.taxType,
-        taxPercent: settings.taxPercent,
-        taxEnable: settings.taxEnable,
-        companyAddress: settings.companyAddress,
-        companyName: settings.companyName,
-        gstNumber: settings.gstNumber
-      });
-
-       setForm({
+       if (settings){
+        setInvoiceMeta({
+          ...invoiceMeta,
+          currency: settings.currency,
+          billableType: settings.billableType,
+          taxType: settings.taxType,
+          taxPercent: settings.taxPercent,
+          taxEnable: settings.taxEnable,
           companyAddress: settings.companyAddress,
           companyName: settings.companyName,
-          gstNumber: settings.gstNumber,
-          customerName:"" , 
-          customerAddress:" " , 
-          email:"" , 
-          invoiceNum:"1",
-          taxPercent: settings.taxPercent,
-          note:settings.note
-        }
-      );
-    }
+          gstNumber: settings.gstNumber
+        });
+  
+         setForm({
+            companyAddress: settings.companyAddress,
+            companyName: settings.companyName,
+            gstNumber: settings.gstNumber,
+            customerName:"" , 
+            customerAddress:" " , 
+            email:"" , 
+            invoiceNum:settings.currentInvoiceNum,
+            taxPercent: settings.taxPercent,
+            note:settings.note
+          }
+        );
+      }
+     }
+     console.log(values)
+     })
+    
+   
     console.log("render")
   }, []);
-console.log(settings)
- if(settings == undefined){
+console.log(form)
+ if(settings == undefined ){
    return (
      <p>Loading!!</p>
    )
@@ -112,6 +115,7 @@ console.log(settings)
         remindedAt: new Date()
       };
      dispatch(createInvoice(finalObj));
+     
    
   };
   return (

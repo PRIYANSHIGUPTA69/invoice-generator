@@ -84,7 +84,7 @@ function TotalAmount(props) {
           name="submitBtn"
           disabled={loadingState}
         >
-         yep 
+         Submit
         </button>
       </Grid>
     </Grid>
