@@ -29,8 +29,9 @@ export const createInvoice = (invoiceDetails) => (
     })
     .then((res) => {
       dispatch({ type: 'CREATE_INVOICE', payload:{ invoiceDetails:invoiceDetails ,path:path } })
-      
+      //history.push(1)
       history.push(`/invoice/${path}`);
+      history.go(0)
     })
     .catch((err) => {
       dispatch({ type: 'CREATE_INVOICE_ERROR', err });
@@ -61,6 +62,7 @@ export const deleteInovice = (invoiceId) => (
     .catch((err) => dispatch({ type: 'WENTWRONG_BAR' }));
   if (history.location.pathname !== '/') {
     history.push('/invoices');
+    history.go(0)
   }
   
 };

@@ -63,7 +63,8 @@ export const updateSetting = (newSetting) => {
         settings: {...newSetting}
       })
       .then(() => {
-        history.push('/settings');
+        history.push("/settings")
+        history.go(0)
         dispatch({ type: 'SETTINGS_SUCCESS_BAR' });
         dispatch({ type: 'SETTING_BUTTON', payload: false });
       });

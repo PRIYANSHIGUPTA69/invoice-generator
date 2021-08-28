@@ -3,12 +3,9 @@ import './table.css'
 import moment from 'moment';
 import {Link} from "react-router-dom"
 function Table(props) {
-  console.log(props)
   const invoices = props.invoice
-  console.log(invoices)
   const dashboard = props.hasOwnProperty("dashboard")?true:false
   let i=0;
-  console.log(dashboard)
     return (
         <table className='table'>
       <tr className="table-head">

@@ -1,4 +1,4 @@
-     
+import { useHistory } from "react-router-dom";  
 import React , {useState  , useEffect} from 'react';
 import Header from '../header/Header';
 import { getFirebase } from 'react-redux-firebase';
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // Component
 function Settings() {
+  const history = useHistory();
   const [firstName , setFirstName] = useState() 
   const [lastName , setLastName] = useState()
   const [settings , setSetting] = useState()
