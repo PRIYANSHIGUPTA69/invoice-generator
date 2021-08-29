@@ -53,7 +53,7 @@ function Settings() {
   }
   return (
     <div className="setting">
-      <Header title={'Settings'} />
+     
       <div>
         <div >
       <div className="name-photo">

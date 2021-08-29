@@ -8,5 +8,5 @@ export default {
   companyAddress: '',
   note: 'Thank You For Shopping',
   currency: 'inr',
-  currentInvoiceNum: '0001'
+  currentInvoiceNum: 1
 };

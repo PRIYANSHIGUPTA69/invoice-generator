@@ -16,7 +16,7 @@ import { createInvoice } from "../redux/actions/invoiceActions";
 import CreatePageLoader from "./createPageLoader";
 import { useHistory } from "react-router-dom";
 function CreateInvoice(props) {
-  console.log(props);
+  const auth = useSelector((state) => state.firebase.auth.uid);
   const history = useHistory();
   const dispatch = useDispatch();
   const [settings, setSetting] = useState();
@@ -27,7 +27,7 @@ function CreateInvoice(props) {
     customerName: "",
     customerAddress: " ",
     email: "",
-    invoiceNum: "",
+    invoiceNum: 0,
     taxPercent: "18",
     note: "welocome",
   });
@@ -36,7 +36,6 @@ function CreateInvoice(props) {
     console.log(e.target.name , e.target.value)
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const [invoiceMeta, setInvoiceMeta] = useState({
     invoiceDate: new Date(),
     dueDate: new Date(),
@@ -51,48 +50,49 @@ function CreateInvoice(props) {
   });
 
   useEffect(() => {
-    let inv = firestore
-      .collection("users")
-      .get()
-      .then((snapshot) => {
+    let obj
+    let inv = firestore.collection('users').get().then((snapshot) => {
         let values = snapshot.docs.map((doc) => {
-          return doc.data();
-        });
-        if (values[0].settings != undefined) {
-          setSetting(values[0].settings);
-          if (settings) {
-            setInvoiceMeta({
-              ...invoiceMeta,
-              currency: settings.currency,
-              billableType: settings.billableType,
-              taxType: settings.taxType,
-              taxPercent: settings.taxPercent,
-              taxEnable: settings.taxEnable,
-              companyAddress: settings.companyAddress,
-              companyName: settings.companyName,
-              gstNumber: settings.gstNumber,
-            });
-
-            setForm({
-              companyAddress: settings.companyAddress,
-              companyName: settings.companyName,
-              gstNumber: settings.gstNumber,
-              customerName: "",
-              customerAddress: " ",
-              email: "",
-              invoiceNum: settings.currentInvoiceNum,
-              taxPercent: settings.taxPercent,
-              note: settings.note,
-            });
+          if(doc.id == auth){
+            console.log(doc.data().settings)
+             obj = doc.data()
+          
           }
-        }
-        console.log(values);
-      });
+          return doc.id ==  auth ? doc.data():undefined
+        });
+        setSetting(obj.settings)
+        if(settings){
+          setInvoiceMeta({
+            ...invoiceMeta,
+            currency: settings.currency,
+            billableType: settings.billableType,
+            taxType: settings.taxType,
+            taxPercent: settings.taxPercent,
+            taxEnable: settings.taxEnable,
+            companyAddress: settings.companyAddress,
+            companyName: settings.companyName,
+            gstNumber: settings.gstNumber,
+          });
 
-    console.log("render");
+          setForm({
+            companyAddress: settings.companyAddress,
+            companyName: settings.companyName,
+            gstNumber: settings.gstNumber,
+            customerName: "",
+            customerAddress: " ",
+            email: "",
+            invoiceNum: settings.currentInvoiceNum,
+            taxPercent: settings.taxPercent,
+            note: settings.note,
+          });
+        }
+     
+        
+      })
+      
   }, []);
-  console.log(form);
-  if (settings == undefined) {
+  console.log(settings , form);
+  if (settings == undefined ) {
     return <p>Loading!!</p>;
   }
   const handleInvoiceMeta = (e) => {
@@ -259,8 +259,8 @@ function CreateInvoice(props) {
                 fullWidth
                 variant="outlined"
                 margin="dense"
-                value={form.invoiceNum}
-                onChange={updateFrom}
+                value={form.invoiceNum+1}
+                
                 required
                 error={form.invoiceNum == "" && true}
               />

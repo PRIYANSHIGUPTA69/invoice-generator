@@ -31,13 +31,13 @@ function Table(props) {
       if(i < 5){
         return (
          
-          <tr  onClick={() => history.push(`/invoice/${invoice.id}`) }>
+          <tr  onClick={() => history.push(`/invoice/${invoice.id}`) } style={{textAlign:"center"}}>
             
-          <td>{i}</td>
-          <td>{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
-          <td>{invoice.data.customerName}</td>
-          <td>{invoice.data.totalAmount}</td>
-          <td>{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
+          <td className="number">{i}</td>
+          <td className="date">{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
+          <td className="name">{invoice.data.customerName}</td>
+          <td className="amount">{invoice.data.totalAmount}</td>
+          <td className="status">{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
          
         </tr>
        
@@ -46,12 +46,12 @@ function Table(props) {
     }else{
       return (
        
-          <tr onClick={() => window.location=`/invoice/${invoice.id}`}>
-          <td>{i}</td>
-          <td>{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
-          <td>{invoice.data.customerName}</td>
-          <td>{invoice.data.totalAmount}</td>
-          <td>{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
+          <tr onClick={() => window.location=`/invoice/${invoice.id}`} style={{textAlign:"center"}}>
+          <td className="number">{i}</td>
+          <td className="date">{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
+          <td className="name">{invoice.data.customerName}</td>
+          <td className="amount">{invoice.data.totalAmount}</td>
+          <td className="status">{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
         
         </tr>
         

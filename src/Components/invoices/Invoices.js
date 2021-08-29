@@ -4,6 +4,7 @@ import Table from '../table/Table';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import { getFirebase } from 'react-redux-firebase';
 import { useSelector, useDispatch } from 'react-redux';
+
 function Invoices() {
   const auth = useSelector((state) => state.firebase.auth.uid);
   const [invoice , setInvoice] = useState()
@@ -35,6 +36,7 @@ function Invoices() {
     </>
   );
     }
+ 
   return (
     <div style={{width:"100%"}}>
       <Header title={'Invoices'} />
