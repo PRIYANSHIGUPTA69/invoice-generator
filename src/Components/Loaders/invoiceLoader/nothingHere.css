@@ -1,0 +1,18 @@
+.nothing-laoder {
+  display: flex;
+  justify-content: center;
+}
+.nothing-laoder div {
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+.craete-link {
+  display: block;
+  width: 100%;
+}
+.craete-img {
+  width: 100%;
+  display: block;
+  margin: 1rem auto;
+}

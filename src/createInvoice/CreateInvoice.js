@@ -106,9 +106,13 @@ function CreateInvoice(props) {
   };
   // Submiting Invoice Details
   const handleInvoiceSubmit = (metaData) => {
+    
     const finalObj = {
       ...form,
       ...metaData,
+      billableType:invoiceMeta.billableType,
+      taxEnable:invoiceMeta.taxEnable,
+      taxType:invoiceMeta.taxType,
       dueDate: invoiceMeta.dueDate,
       invoiceDate: invoiceMeta.invoiceDate,
       paidStatus: false,

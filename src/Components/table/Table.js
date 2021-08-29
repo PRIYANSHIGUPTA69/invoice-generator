@@ -2,13 +2,22 @@ import React from 'react'
 import './table.css'
 import moment from 'moment';
 import {Link} from "react-router-dom"
+import {useHistory} from "react-router-dom"
+import NothingHere from '../Loaders/invoiceLoader/NothingHere';
 function Table(props) {
   const invoices = props.invoice
+  const history  = useHistory()
   const dashboard = props.hasOwnProperty("dashboard")?true:false
+  console.log(invoices)
   let i=0;
+  if(invoices.length == 0){
+    return (
+      <NothingHere></NothingHere>
+    )
+  }
     return (
         <table className='table'>
-      <tr className="table-head">
+      <tr className="table-head" >
       <th className="number">No.</th>
         <th className="date">Date</th>
         <th className="name">Name</th>
@@ -21,8 +30,23 @@ function Table(props) {
     if(dashboard === true){
       if(i < 5){
         return (
-          <Link to = {`/invoice/${invoice.id}`} > 
-          <tr>
+         
+          <tr  onClick={() => history.push(`/invoice/${invoice.id}`) }>
+            
+          <td>{i}</td>
+          <td>{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
+          <td>{invoice.data.customerName}</td>
+          <td>{invoice.data.totalAmount}</td>
+          <td>{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
+         
+        </tr>
+       
+        )
+      }
+    }else{
+      return (
+       
+          <tr onClick={() => window.location=`/invoice/${invoice.id}`}>
           <td>{i}</td>
           <td>{moment(invoice.data.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
           <td>{invoice.data.customerName}</td>
@@ -30,21 +54,7 @@ function Table(props) {
           <td>{invoice.data.paidStatus == false? "Pending" : "Paid"}</td>
         
         </tr>
-        </Link>
-        )
-      }
-    }else{
-      return (
-        <Link to = {`/invoice/${invoice.id}`} > 
-          <tr>
-          <td>{i}</td>
-          <td>{moment(invoice.invoiceDate.toDate()).format('DD-MM-YYYY')}</td>
-          <td>{invoice.customerName}</td>
-          <td>{invoice.totalAmount}</td>
-          <td>{invoice.paidStatus == false? "Pending" : "Paid"}</td>
         
-        </tr>
-        </Link>
       )
     }
    

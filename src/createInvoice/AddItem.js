@@ -120,7 +120,7 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
           alignItems="center"
           style={{ height: '100%' }}
         >
-          <button type="submit" >
+          <button type="submit" className="secondary">
             ADD
           </button>
         </Grid>

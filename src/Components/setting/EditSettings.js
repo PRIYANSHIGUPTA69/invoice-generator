@@ -6,9 +6,7 @@ import './editSettings.css'
 import Header from '../header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFirebase } from 'react-redux-firebase';
-
 import { updateSetting } from '../../redux/actions/authAction';
-import { confirmSettingSaveAction } from '../../redux/actions/alertDialogActions';
 // Component
 function EditSetting() {
   const dispatch = useDispatch();

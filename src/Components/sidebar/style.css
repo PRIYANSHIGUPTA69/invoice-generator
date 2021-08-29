@@ -1,6 +1,6 @@
 .sidebar{
     
-    max-width: 300px;
+    max-width:20%;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -17,7 +17,15 @@ a {
     margin: 0 3rem 0;
     margin-top: 0;
   }
-  a:first-child img {
-    width: 100%;
-    height: 200px;
-  }
+.image{
+  width: 186px;
+  height: 139px;
+  border-radius:0;
+
+}
+.sidebar a{
+  margin-left: 1rem;
+  line-height: 2rem;
+  font-size: 20px;
+ font-weight: 500;
+}

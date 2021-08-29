@@ -11,7 +11,7 @@ export default function Sidebar() {
     return (
         <div className="sidebar">
         <Link to="/">
-        <img src={Logo} alt="Logo" />
+        <img className="image" src={Logo} alt="Logo" />
       </Link>
       <Navlink
         Icon={DashboardIcon}

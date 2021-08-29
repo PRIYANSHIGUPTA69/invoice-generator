@@ -146,10 +146,10 @@ let amount = (form.rate * form.qty * (1 - form.disc / 100)).toFixed(2)
             </>
           ) : (
             <>
-              <button  onClick={setEditing}>
+              <button  onClick={setEditing} className="secondary">
                 EDIT
               </button>
-              <button color="#FD5665" onClick={handleItemDelete}>
+              <button color="#FD5665" className="primary" onClick={handleItemDelete}>
                 DELETE
               </button>
             </>

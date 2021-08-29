@@ -1,0 +1,29 @@
+.invalidPage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+ .invalidPage div {
+    width: 100%;
+    max-width: 500px;
+
+    text-align: center;
+ }
+ .invalidPage div  img {
+      width: 100%;
+      display: block;
+      margin: 2rem auto;
+}
+.button{
+    display: inline-block;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    color: rgb(36, 180, 126);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(50 50 93 / 11%) 0px 4px 6px 0px, rgb(0 0 0 / 8%) 0px 1px 3px 0px;
+}

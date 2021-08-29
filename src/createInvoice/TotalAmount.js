@@ -76,10 +76,9 @@ function TotalAmount(props) {
           </p>
         )}
         <button
-          {...register(" ",{
-            validate: () => props.items.length !== 0
-          })}
-          className="submit-btn"
+          
+          className="secondary"
+          style={{float:"middle"}}
           onClick={handleSubmit(handleTaxData)}
           name="submitBtn"
           disabled={loadingState}

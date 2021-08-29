@@ -12,10 +12,13 @@
     box-shadow: 4px 4px 28px 10px rgba(240, 240, 240, 0.9);
 }
 .billDetails{
-    display: flex;
+  display: flex;
+  width: auto;
+  margin: 0 auto;
   justify-content: space-between;
-  margin: 2rem auto;
+  flex-direction: row;
 }
+
 .billColumn{
     width: 40%;
     border: red 2px solidcolor;
@@ -25,7 +28,7 @@
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bolder;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .invoiceHeading{
     font-size: 32px;
@@ -36,14 +39,7 @@
     margin-top: 4rem;
     font-weight: 600;
 }
-p{
-  display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: 600;
-}
+
 .billHead{
     background: #444;
   border-radius: 3px;
@@ -65,4 +61,8 @@ p{
   align-items: center;
   font-weight: 600;
   margin-top: -1rem;
+}
+p{
+  
+  line-height: 1%;
 }

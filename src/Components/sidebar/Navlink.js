@@ -6,17 +6,12 @@ function Navlink(props) {
   const {Icon, name, color, to } = props;
   var stylingObject = {
     color: {
-      color: `${color}`,
       fontSize:"1rem",
       fontWeight:"bold"
     },
-   
+    paraColor : {color}
   };
-  const onHover = (e) => {
-    e.target.style.boxShadow = `3px 3px 12px ${color}`;
 
-    e.target.style.borderRadius="120px"
-  };
   return (
    
       <NavLink
@@ -27,12 +22,11 @@ function Navlink(props) {
       to={to}
      
     >
-      <div style={stylingObject.display}  onMouseEnter={onHover}
-      onMouseLeave={(e) => {e.target.style.boxShadow = "none"}}>
-      <span style={stylingObject.color}>
+      <div style={stylingObject.display}>
+      <span style={stylingObject.paraColor}>
        <Icon/>
       </span>
-      <p style={stylingObject.color}>{name} </p>
+      <p style={stylingObject.paraColor}>{name} </p>
       </div>
       
     </NavLink>

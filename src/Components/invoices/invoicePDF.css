@@ -1,12 +1,19 @@
 .billPage {
   padding: 80px 40px;
   font-family: 'Noto Sans';
+  max-width: 850px;
+    width: 850px;
+    overflow: auto;
+    margin: 2rem auto;
+    padding: 6rem 4rem;
+    box-shadow: 4px 4px 28px 10px rgb(240 240 240 / 9)
 }
 .billDetails{
-    display: table;
-    width: auto;
-    margin: 0 auto;
-    flex-direction: row;
+  display: flex;
+  width: auto;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .billColumnLeft {
@@ -35,12 +42,13 @@
   font-size: 12px;
   text-transform: uppercase;
   font-weight: bolder;
+  margin-bottom: 1rem;
 }
 
 .details{
   font-size: 12;
   padding: 5px 0;
-  line-height: 1.2;
+  line-height: 0;
 }
 
 .textt{
@@ -52,9 +60,12 @@
   width: 100%;
 }
 .billRow{
-  margin: 0 auto;
-  flex-direction: row;
-  padding: 8px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 40px;
 }
 .billRowHead{
   background-color: #333;
@@ -69,9 +80,9 @@
 }
 .billDataNum{
   width: 15%;
-  text-align: right;
+  text-align: center;
   padding: 0 5px;
-  font-size: 12px;
+  font-size: 20px
 }
 .billDataSerial{
   width: 5%;

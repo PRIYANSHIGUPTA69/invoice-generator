@@ -97,18 +97,16 @@ export const sendInvoiceMail = (id) => (
 ) => {
   dispatch({ type: 'EMAILSEND_BUTTON', payload: true });
 
-  const lastReminder = getState()
-    .firestore.data.invoices[id].remindedAt.toDate()
-    .setHours(0, 0, 0, 0);
   const today = new Date().setHours(0, 0, 0, 0);
 
-  const diff = Math.floor(Math.abs(today - lastReminder) / 1000 / 60 / 60 / 24);
+  const diff = Math.floor(Math.abs(today ) / 1000 / 60 / 60 / 24);
 
   // Stop Function if Reminded on same Day
   if (diff === 0) {
     dispatch({ type: 'EMAILSEND_BUTTON', payload: false });
     return dispatch({ type: 'EMAILMAXLIMIT_BAR' });
   }
+  console.log("here")
 
   var invoiceRemindMail = getFirebase()
     .functions()

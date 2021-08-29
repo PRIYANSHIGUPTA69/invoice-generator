@@ -6,6 +6,10 @@
     margin-top: 1rem;
     margin-left: auto;
     display: block;
+    background-color: rgb(103, 114, 229);
+    width:150px;
+    height:3rem;
+    color:white
   }
   .MuiInputBase-root.MuiInputBase-root.MuiOutlinedInput-root.Mui-disabled
     fieldset {

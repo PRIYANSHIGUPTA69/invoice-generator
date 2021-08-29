@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import ProductListItem from './ProductListItem';
 import AddItem from './AddItem';
 import TotalAmount from "./TotalAmount"
-// Component
+import "./productList.css"
 function ProductList(props) {
      const [items, setItems] = useState([]);
   const [showAddItemForm,setShowAddItemForm] = useState(true)

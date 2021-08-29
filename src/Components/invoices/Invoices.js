@@ -1,6 +1,7 @@
 import React , {useState , useEffect} from "react";
 import Header from "../header/Header"
 import Table from '../table/Table';
+import { isLoaded, isEmpty } from 'react-redux-firebase';
 import { getFirebase } from 'react-redux-firebase';
 import { useSelector, useDispatch } from 'react-redux';
 function Invoices() {
@@ -10,19 +11,30 @@ function Invoices() {
   const dispatch = useDispatch();
   useEffect(async () => {
     let inv = firestore.collection('users').doc(auth).collection("invoices").orderBy("invoiceDate", "desc").get().then(snapshot => {
-     let values = snapshot.docs.map(doc => {
-        return doc.data()
+      let values = snapshot.docs.map(doc => {
+        let obj = {data:doc.data() , id:doc.id}
+        console.log(obj)
+        return obj
      });
-     setInvoice(values)
+     let invo = []
+     for(let i=0; i<values.length ;i++){
+       invo.push(values[i].data)
+     }
+     
+    setInvoice(values)
     })
     
    }, [])
-  if(invoice == undefined){
-    return (
-      <p>Loading!!</p>
-    )
-  }
+
+
   console.log(invoice)
+  if (invoice == undefined){
+    return (
+    <>
+      <p>Loading !!</p>
+    </>
+  );
+    }
   return (
     <div style={{width:"100%"}}>
       <Header title={'Invoices'} />

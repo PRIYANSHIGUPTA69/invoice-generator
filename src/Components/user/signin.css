@@ -1,0 +1,70 @@
+.footer-text{
+    font-size: 20px;
+    margin-top: 4rem;
+    margin-left: 4rem;
+    width: 100%;
+  }
+  .footer-text .signup-link{
+    text-decoration: none;
+    color:rgb(253, 167, 52);
+    font-weight: bold;
+    margin-left: 1rem;
+  }
+  .login-image-logo{
+    width: 170px;
+    height: 170px;
+    margin-left: 10vw;
+    margin-top: -25px;
+    box-sizing: border-box;
+  }
+  input {
+    font-family: 'Lexend Deca';
+    border: transparent 2px solid;
+    border-radius: 3px;
+    background-color: #f2f6f9;
+    color: #6b7c93;
+    box-shadow: 0 3px 6px rgba(50, 50, 93, 0.1);
+    padding: 6px 10px;
+    transition: box-shadow 350ms ease;
+    display: block;
+    width: 90%;
+    
+  }
+  input:active,
+  input:focus {
+    box-shadow: 0 3px 9px 2px rgba(50, 50, 93, 0.15);
+    outline: none;
+  }
+  .login-button {
+    display: inline-block;
+    width: 70%;
+    height:3rem;
+    margin-left: 12%;
+    height: 2.5rem;
+    margin-bottom: .5rem;
+    padding: 0;
+    font-size: 20px;
+    background: rgb(251, 242, 234);
+    color: rgb(253, 167, 52);
+   
+  }
+.login{
+    max-width: 450px;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    box-shadow: rgb(50 50 93 / 15%) 0px 3px 9px 1px;
+    margin: 0px auto;
+    background-color: rgb(255, 255, 255);
+}
+.greeting-login{
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.greeting-lg{
+  font-size: 2rem;
+  text-align: center;
+  color: rgb(107, 124, 147)
+}

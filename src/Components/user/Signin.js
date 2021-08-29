@@ -4,7 +4,9 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import {useForm} from "react-hook-form"
+import './signin.css'
 import {signIn} from "../../redux/actions/authAction"
+import Logo from "../../images/logo.png"
 function Signin() {
      const { register, handleSubmit, formState:{errors} } = useForm();
 
@@ -26,17 +28,22 @@ function Signin() {
   }, []);
 
     return (
-        <div>
-             <div>
-      <div className="greeting">Create an Account</div>
-      <form onSubmit={handleSubmit(handleLogin)}>
+        <div className="login">
+             <div style={{width: '450px' , marginTop:"5px"}}>
+      
+      <div className="brand-image">
+          <img className="login-image-logo" src={Logo} alt="Logo" />
+        </div>
+   <div className="greeting-lg">Welcome Back!</div>
+   <div className="greeting-login">Sign in to Your Account</div> 
+         <form onSubmit={handleSubmit(handleLogin)}>
        <div className={errors.length >0 &&errors.email ? 'error' :""}>
           <label htmlFor="email">Email</label>
           <input
             type="text"
             name="email"
             id="email"
-            placeholder="regina@email.com"
+            placeholder="abc@email.com"
             {...register("email" ,{
               required: true,
               minLength: 2,
@@ -56,7 +63,7 @@ function Signin() {
             type="password"
             name="password"
             id="password"
-            placeholder="Hunter2"
+            placeholder="******"
             {...register("password" ,{
               required: true,
               minLength: 6
@@ -74,13 +81,13 @@ function Signin() {
             <ErrorOutlineIcon /> {errorState}
           </div>
         )}
-         <button type="submit" disabled={loadingState}>
+         <button className="login-button" type="submit" disabled={loadingState}>
           Continue{' '}
-          {loadingState && <AutorenewIcon></AutorenewIcon>}
+          {!loadingState && <AutorenewIcon className="loading"></AutorenewIcon>}
         </button>
       </form>
       <p className="footer-text">
-        New User? <Link to="/register">Create An Account</Link>
+        New User? <Link to="/register" className="signup-link">Create An Account</Link>
       </p>
     </div>
         </div>

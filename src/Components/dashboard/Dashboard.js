@@ -9,9 +9,9 @@ import AlarmOnIcon from '@material-ui/icons/AlarmOn';
 import Table from "../table/Table"
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import Welcome from "../Welcome"
 import {getFirebase} from "react-redux-firebase"
 import Graph from '../graph/Graph';
+import Welcome from '../Loaders/invoiceLoader/Welcome';
 function Dashboard() {
   const auth = useSelector((state) => state.firebase.auth.uid);
   const [dataObj , setData] = useState()
@@ -36,10 +36,10 @@ function Dashboard() {
     })
     
    }, [])
-  if(invoice == undefined || dataObj == undefined){
+  if(invoice == undefined || dataObj == undefined || invoice.length ==0){
    
     return (
-      <p>Loading!!</p>
+      <Welcome></Welcome>
     )
   }
   console.log(invoice ,  dataObj)

@@ -7,9 +7,9 @@ import { AppBar } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../redux/actions/authAction';
-import { confirmLogoutAction } from '../../redux/actions/alertDialogActions';
 import { getFirebase } from 'react-redux-firebase';
 import "./header.css";
+import AppLoader from "../Loaders/appLoader/AppLoader";
 function Header({ title }) {
   const [firstName , setFirstName] = useState() 
   const [lastName , setLastName] = useState()
@@ -44,7 +44,7 @@ function Header({ title }) {
    }, [])
    if(firstName ==undefined || lastName ==undefined){
      return (
-       <p>Loading!!</p>
+     <p>Loading!!</p>
      )
    }
   return (
@@ -53,13 +53,13 @@ function Header({ title }) {
         <h2 style={{textDecoration:"none" ,fontSize:"38px" , color:"black" , width:"300px"}}>{title}</h2>
         <div className="right-header-part">
           <div className="left">
-          <Link to="/settings">
-            <img
+          <Link to="/settings" className="link">
+            <img 
               src={`https://ui-avatars.com/api/?name=${firstName}+${lastName}&color=2e5bff&background=e0e7ff`}
               alt="User Logo"
             />
           </Link>
-          <Link to="/settings" style={{textDecoration:"none" ,fontSize:"25px" , marginLeft:"80px" , color:"black"}}>{firstName} {lastName}</Link>
+          <Link className="link" to="/settings" style={{textDecoration:"none" ,fontSize:"25px" , marginLeft:"80px" , color:"black"}}>{firstName} {lastName}</Link>
           </div>
        <div className="right">
        <button onClick={handleLogout} >Logout</button>

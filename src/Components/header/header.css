@@ -37,7 +37,7 @@ a{
   align-items: center;
   
   min-width: 60%;}
-a:first-child img {
+.link:first-child img {
   margin-top: 10px;
   width: 68px;
   height: 68px;
@@ -45,7 +45,7 @@ a:first-child img {
   margin-right: 30px;
   /* height: 200px; */
 }
-a:first-child {
+.link:first-child {
   width: 0px; 
 margin: 0 ;
 margin-left: 20px;

@@ -13,9 +13,12 @@ import Settings from './Components/setting/Settings';
 import EditSetting from './Components/setting/EditSettings';
 import InvoiceDetails from './Components/invoices/InvoiceDetails';
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import InvalidPage from './Components/invalidPage/InvalidPage';
+import AppLoader from './Components/Loaders/appLoader/AppLoader';
 function App() {
   const loader = false;
 const auth = useSelector((state) => state.firebase.auth);
+console.log(auth)
   useFirestoreConnect([
     {
       collection: 'users',
@@ -26,21 +29,24 @@ const auth = useSelector((state) => state.firebase.auth);
       storeAs: 'invoices'
     }
   ]);
+  if (!isLoaded(auth)) {
+    return <AppLoader></AppLoader>
+  }
 
-
-  if (isEmpty(auth))
+  if (auth == undefined || auth.uid == undefined)
   
     return (
       <Switch>
         <Route exact path="/register" component={Signup} />
           <Route exact path="/login" component={Signin} />
+          
       </Switch>
     );
 
   return (
         <div className="container">
        <Sidebar className ="sidebar"></Sidebar>
-         <div classname="component" style={{position: "absolute" , left: "250px"}}>
+         <div classname="component" style={{marginLeft: "250px"}}>
          <Switch>
        
        <Route exact path="/" component={Dashboard} />
@@ -51,7 +57,7 @@ const auth = useSelector((state) => state.firebase.auth);
        <Route exact path="/invoice/:id"  component={InvoiceDetails}/>
        <Route exact path="/register" render={() => <Redirect to="/" />} />
        <Route exact path="/login" render={() => <Redirect to="/" />} />
-     
+       <Route component={InvalidPage} />
        
      </Switch>
          </div>

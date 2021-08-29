@@ -81,6 +81,7 @@ export const signOut = () => {
       .then(() => {
         dispatch({ type: 'LOGOUT_SUCCESS' });
         history.push('/login');
+        history.go(0)
       });
   };
 };
