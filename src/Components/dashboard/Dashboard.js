@@ -42,7 +42,6 @@ function Dashboard() {
       <Welcome></Welcome>
     )
   }
-  console.log(invoice ,  dataObj)
   let paidInvoices , pendingInvoices
  paidInvoices = invoice.filter(invoice => {
    return invoice.paidStatus== true
@@ -87,11 +86,11 @@ function Dashboard() {
         align-items="center"
         style={{ marginTop: '3rem', width: '100%' }}
       >
-        <Grid item xs={12} md={12} lg={9}>
+        <Grid item xs={12} md={12} lg={8}>
           <div className=
           'recent'>
-            <h2>Recent Invoicces</h2>
-            <Link>View Alll</Link>
+            <h2>Recent Invoices</h2>
+            <Link to="/invoices">View Alll</Link>
           </div>
          <Table invoice={dataObj} dashboard={true}></Table>
         </Grid>
