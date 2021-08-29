@@ -11,6 +11,7 @@ import { getFirebase } from 'react-redux-firebase';
 import "./header.css";
 import AppLoader from "../Loaders/appLoader/AppLoader";
 function Header({ title }) {
+  const auth = useSelector((state) => state.firebase.auth.uid);
   const [firstName , setFirstName] = useState() 
   const [lastName , setLastName] = useState()
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,21 +26,17 @@ function Header({ title }) {
     dispatch((signOut()));
   };
   useEffect(async () => {
+    let obj;
     let inv = firestore.collection('users').get().then(snapshot => {
      let values = snapshot.docs.map(doc => {
-        let obj = {data:doc.data() , id:doc.id}
-       
-        return doc.data()
+       if(doc.id == auth){
+         obj = {data:doc.data() , id:doc.id}
+       }
+     return doc.data()
      });
-     
-     if(values[0] ){
-      setFirstName(values[0].firstName.toUpperCase())
-      setLastName(values[0].lastName.toUpperCase())
-     }
-    
-
-     
-    })
+    setFirstName(obj.data.firstName.toUpperCase())
+      setLastName(obj.data.lastName.toUpperCase())
+   })
     
    }, [])
    if(firstName ==undefined || lastName ==undefined){

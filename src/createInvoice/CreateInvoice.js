@@ -17,7 +17,6 @@ import CreatePageLoader from "./createPageLoader";
 import { useHistory } from "react-router-dom";
 function CreateInvoice(props) {
   const auth = useSelector((state) => state.firebase.auth.uid);
-  const history = useHistory();
   const dispatch = useDispatch();
   const [settings, setSetting] = useState();
   const [form, setForm] = useState({
@@ -56,41 +55,44 @@ function CreateInvoice(props) {
           if(doc.id == auth){
             console.log(doc.data().settings)
              obj = doc.data()
+             setSetting(obj.settings)
+           
           
           }
           return doc.id ==  auth ? doc.data():undefined
         });
-        setSetting(obj.settings)
-        if(settings){
-          setInvoiceMeta({
-            ...invoiceMeta,
-            currency: settings.currency,
-            billableType: settings.billableType,
-            taxType: settings.taxType,
-            taxPercent: settings.taxPercent,
-            taxEnable: settings.taxEnable,
-            companyAddress: settings.companyAddress,
-            companyName: settings.companyName,
-            gstNumber: settings.gstNumber,
-          });
+       if(settings){
+          console.log("hello")
+        setInvoiceMeta({
+          ...invoiceMeta,
+          currency: settings.currency,
+          billableType: settings.billableType,
+          taxType: settings.taxType,
+          taxPercent: settings.taxPercent,
+          taxEnable: settings.taxEnable,
+          companyAddress: settings.companyAddress,
+          companyName: settings.companyName,
+          gstNumber: settings.gstNumber,
+        });
 
-          setForm({
-            companyAddress: settings.companyAddress,
-            companyName: settings.companyName,
-            gstNumber: settings.gstNumber,
-            customerName: "",
-            customerAddress: " ",
-            email: "",
-            invoiceNum: settings.currentInvoiceNum,
-            taxPercent: settings.taxPercent,
-            note: settings.note,
-          });
-        }
+        setForm({
+          companyAddress: settings.companyAddress,
+          companyName: settings.companyName,
+          gstNumber: settings.gstNumber,
+          customerName: "",
+          customerAddress: " ",
+          email: "",
+          invoiceNum: settings.currentInvoiceNum,
+          taxPercent: settings.taxPercent,
+          note: settings.note,
+        });
+       }
+        
      
         
       })
       
-  }, []);
+  }, settings);
   console.log(settings , form);
   if (settings == undefined ) {
     return <p>Loading!!</p>;

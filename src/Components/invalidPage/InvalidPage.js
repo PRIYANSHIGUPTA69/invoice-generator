@@ -11,7 +11,7 @@ function InvalidPage() {
     <div className = "invalidPage">
       <div>
         <img src={NotFoundImg} alt="Not Found" />
-        <button className="button" onClick= {(e) => {history.push("/")}}>
+        <button className="invalid-button" onClick= {(e) => {history.push("/")}}>
           Return Home
         </button>
       </div>

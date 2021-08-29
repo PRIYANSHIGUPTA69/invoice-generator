@@ -27,6 +27,7 @@ function EditSetting() {
       taxPercent:"",
       companyAddress:"",
       note:"",
+      invoiceNum:1
     }
     
   );
@@ -50,10 +51,11 @@ function EditSetting() {
       taxPercent:settings.taxPercent,
       companyAddress:settings.companyAddress,
       note:settings.note,
+      invoiceNum: settings.currentInvoiceNum,
     })
     
    }, [])
-   if(settings == undefined || form == undefined){
+   if(settings == undefined){
      return (
        <p>Loading!!</p>
      )
@@ -64,7 +66,7 @@ function EditSetting() {
   const handleSubmit = (metaData) => {
     const obj ={
       companyName: form.companyName,
-      gstNumber:form.companyAddress,
+      gstNumber:form.gstNumber,
       taxPercent:form.taxPercent,
       companyAddress:form.companyAddress,
       note:form.note,
@@ -72,6 +74,7 @@ function EditSetting() {
       taxType: invoiceMeta.taxType,
       taxEnable: invoiceMeta.taxEnable,
       currency: invoiceMeta.currency,
+      currentInvoiceNum:form.invoiceNum
     }
    dispatch(updateSetting(obj));
     

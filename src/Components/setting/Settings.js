@@ -17,16 +17,20 @@ function Settings() {
   const auth = useSelector((state) => state.firebase.auth.uid);
   const firestore = getFirebase().firestore();
   useEffect(async () => {
+    let obj;
     let inv = firestore.collection('users').get().then(snapshot => {
      let values = snapshot.docs.map(doc => {
-        let obj = {data:doc.data() , id:doc.id}
-       
-        return doc.data()
+       if(doc.id == auth){
+         obj = {data:doc.data() , id:doc.id}
+       }
+     return doc.data()
      });
-     setFirstName(values[0].firstName.toUpperCase())
-     setLastName(values[0].lastName.toUpperCase())
+     console.log(obj)
     
-   setSetting(values[0].settings)
+      setFirstName(obj.data.firstName.toUpperCase())
+      setLastName(obj.data.lastName.toUpperCase())
+    
+   setSetting(obj.data.settings)
      
     })
     
