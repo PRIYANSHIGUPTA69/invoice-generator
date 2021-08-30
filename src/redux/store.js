@@ -47,3 +47,5 @@ export const rrfProps = {
   config: rrfConfig,
   dispatch:store.dispatch
 };
+let auth = firebase.auth();
+export default auth;
