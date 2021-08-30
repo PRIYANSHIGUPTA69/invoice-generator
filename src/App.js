@@ -40,7 +40,7 @@ function App() {
     },
   ]);
   if (isLoaded(auth)) {
-    console.log(auth);
+    return (<AppLoader></AppLoader>)
   }
   console.log(auth.currentUser);
   if (!auth.currentUser) {
@@ -105,6 +105,4 @@ function PrivateRoute(props) {
   );
 }
 export default App;
-{
-  /*  <Sidebar className="sidebar"></Sidebar> */
-}
+
