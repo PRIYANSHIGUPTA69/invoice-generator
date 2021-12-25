@@ -8,7 +8,7 @@
     width: 850px;
     overflow: auto;
     margin: 2rem auto;
-    padding: 6rem 4rem;
+    padding: 10px 20px;
     box-shadow: 4px 4px 28px 10px rgba(240, 240, 240, 0.9);
 }
 .billDetails{

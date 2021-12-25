@@ -56,7 +56,7 @@ function Header({ title }) {
               alt="User Logo"
             />
           </Link>
-          <Link className="link" to="/settings" style={{textDecoration:"none" ,fontSize:"25px" , marginLeft:"80px" , color:"black"}}>{firstName} {lastName}</Link>
+          <Link className="link" to="/settings" style={{textDecoration:"none" ,fontSize:"20px" , marginLeft:"70px" , color:"black"}}>{firstName} {lastName}</Link>
           </div>
        <div className="right">
        <button onClick={handleLogout} >Logout</button>

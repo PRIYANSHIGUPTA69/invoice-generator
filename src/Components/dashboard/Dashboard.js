@@ -84,9 +84,8 @@ function Dashboard() {
         container
         justify="center"
         align-items="center"
-        style={{ marginTop: '3rem', width: '100%' }}
       >
-        <Grid item xs={12} md={12} lg={8}>
+        <Grid item xs={12} md={9} >
           <div className=
           'recent'>
             <h2>Recent Invoices</h2>
@@ -94,11 +93,9 @@ function Dashboard() {
           </div>
          <Table invoice={dataObj} dashboard={true}></Table>
         </Grid>
-        <Hidden mdDown>
-          <Grid item md={3} lg={3}>
+        <Grid item md={3} lg={3}>
             <Graph paidInvoices={paidInvoices.length} pendingInvoices={pendingInvoices.length}></Graph>
           </Grid>
-        </Hidden>
   </Grid>
     </div>
   );

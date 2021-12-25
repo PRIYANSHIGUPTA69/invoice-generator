@@ -15,19 +15,10 @@ import InvoiceDetails from "./Components/invoices/InvoiceDetails";
 import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import InvalidPage from "./Components/invalidPage/InvalidPage";
 import AppLoader from "./Components/Loaders/appLoader/AppLoader";
-import auth from "./redux/store";
+
 function App() {
-  const [user, setCurrentUser] = useState();
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("inside listner", user);
-      setCurrentUser(user);
-    });
-    return function () {
-      console.log("Hello");
-      unsubscribe();
-    };
-  }, []);
+  const auth = useSelector((state) => state.firebase.auth);
+
 
   useFirestoreConnect([
     {
@@ -39,11 +30,12 @@ function App() {
       storeAs: "invoices",
     },
   ]);
-  if (isLoaded(auth)) {
+  console.log(auth);
+  if (!isLoaded(auth)) {
     return (<AppLoader></AppLoader>)
   }
   console.log(auth.currentUser);
-  if (!auth.currentUser) {
+  if (!auth.uid) {
     console.log(auth);
     return (
       <Switch>
@@ -58,18 +50,16 @@ function App() {
       <Sidebar className="sidebar" />
       <div classname="component" style={{ marginLeft: "250px" }}>
         <Switch>
-          <PrivateRoute user={user} exact path="/" abc={Dashboard} />
-          <PrivateRoute user={user} exact path="/create" abc={CreateInvoice} />
-          <PrivateRoute user={user} exact path="/invoices" abc={Invoices} />
-          <PrivateRoute user={user} exact path="/settings" abc={Settings} />
+          <PrivateRoute exact path="/" abc={Dashboard} />
+          <PrivateRoute exact path="/create" abc={CreateInvoice} />
+          <PrivateRoute exact path="/invoices" abc={Invoices} />
+          <PrivateRoute exact path="/settings" abc={Settings} />
           <PrivateRoute
-            user={user}
             exact
             path="/settings/edit"
             abc={EditSetting}
           />
           <PrivateRoute
-            user={user}
             exact
             path="/invoice/:id"
             abc={InvoiceDetails}
